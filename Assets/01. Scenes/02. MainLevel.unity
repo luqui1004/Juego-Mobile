@@ -2198,48 +2198,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7393978c9ebad15489236d16a0e98096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Zone: 0
   layers:
   - tiles:
-    - {fileID: 1874188754}
-    - {fileID: 255994210}
-    - {fileID: 287789023}
+    - {fileID: 1874188753}
+    - {fileID: 255994209}
+    - {fileID: 287789022}
     speed: 3.2
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 354242090}
-    - {fileID: 1850735655}
-    - {fileID: 126037781}
+    - {fileID: 354242089}
+    - {fileID: 1850735654}
+    - {fileID: 126037780}
     speed: 4.4
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 1814329227}
-    - {fileID: 796515201}
-    - {fileID: 501349809}
+    - {fileID: 1814329226}
+    - {fileID: 796515200}
+    - {fileID: 501349808}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 783169353}
-    - {fileID: 513668396}
-    - {fileID: 346359609}
+    - {fileID: 783169352}
+    - {fileID: 513668395}
+    - {fileID: 346359608}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 606387182}
-    - {fileID: 1086469250}
-    - {fileID: 370463475}
+    - {fileID: 606387181}
+    - {fileID: 1086469249}
+    - {fileID: 370463474}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 484156813}
-    - {fileID: 112790800}
-    - {fileID: 1625738454}
+    - {fileID: 484156812}
+    - {fileID: 112790799}
+    - {fileID: 1625738453}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 1245632975}
-    - {fileID: 1139736838}
-    - {fileID: 622355507}
+    - {fileID: 1245632974}
+    - {fileID: 1139736837}
+    - {fileID: 622355506}
     speed: 6
+    sprites: []
     spriteWidth: 0
   stopParallax: 0
 --- !u!1 &602634250
@@ -2780,11 +2788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239e51c248fb6f8479ac9a79be928bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &701835269 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1198791394769021928, guid: 3f61b111724a11f4cb772e962cb5b09c, type: 3}
-  m_PrefabInstance: {fileID: 8696470495546859632}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &783169352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,6 +2990,11 @@ Transform:
   - {fileID: 501349809}
   m_Father: {fileID: 1249855961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &878864786 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 885939824849263353, guid: 3f61b111724a11f4cb772e962cb5b09c, type: 3}
+  m_PrefabInstance: {fileID: 8696470495546859632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980428191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3818,7 +3826,7 @@ Transform:
   - {fileID: 980767936}
   - {fileID: 1911272656}
   - {fileID: 1158826952}
-  - {fileID: 701835269}
+  - {fileID: 878864786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1297222740
@@ -4176,32 +4184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1133855794b99940aeba5956fdbaa23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 597328931}
-  - {fileID: 1371216671}
-  - {fileID: 1024632062}
-  - {fileID: 980428192}
-  hitZones:
-  - {fileID: 1062934335}
-  - {fileID: 450328980}
-  - {fileID: 698644472}
-  - {fileID: 602634255}
-  arrowPrefab: {fileID: 901044968442523193, guid: 1fda45f493411c44787236d51ac58106, type: 3}
-  arrowSpeed: 500
-  totalArrows: 5
-  spawnIntervalMin: 0.1
-  spawnIntervalMax: 0.3
-  perfectTime: 0.08
-  goodTime: 0.14
-  badTime: 0.25
-  missTime: 0.4
-  missDistance: 1.2
-  combatHUD: {fileID: 1584997167}
-  combatSystem: {fileID: 1584997167}
-  mainCamera: {fileID: 1753417507}
-  zoomDuration: 1.5
-  originalSize: 5
-  originalY: 0
 --- !u!1 &1625738453
 GameObject:
   m_ObjectHideFlags: 0
