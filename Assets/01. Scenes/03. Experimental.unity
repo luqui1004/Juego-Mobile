@@ -808,7 +808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.893, y: 804.79}
+  m_AnchoredPosition: {x: 11.893, y: 497.2199}
   m_SizeDelta: {x: 617.9172, y: 72.5163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570234456
@@ -942,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -426.88, y: 768.04}
+  m_AnchoredPosition: {x: -426.88, y: 460.4699}
   m_SizeDelta: {x: 145.0326, y: 145.0326}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573059481
@@ -1378,6 +1378,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a260588de9a694794d0ecaf40c31ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &637471038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637471039}
+  - component: {fileID: 637471040}
+  m_Layer: 0
+  m_Name: ScoreManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637471039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637471038}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2118590648}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637471040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637471038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cba6812b62a064eac939cc0f734736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
+  coins: 0
+  Scoreboard: {fileID: 944868383}
+  Coinsboard: {fileID: 570234456}
 --- !u!1 &637953801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,8 +1460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: 770}
-  m_SizeDelta: {x: -404.1479, y: -717.6794}
+  m_AnchoredPosition: {x: 5, y: 461.36}
+  m_SizeDelta: {x: -404.1479, y: -257.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637953803
 MonoBehaviour:
@@ -1478,7 +1526,7 @@ Transform:
   m_GameObject: {fileID: 638957329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 860.48, y: 1138.4146, z: -10.58366}
+  m_LocalPosition: {x: 860.48, y: 1138.4146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1947,7 +1995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.893, y: 733.57}
+  m_AnchoredPosition: {x: 11.893, y: 426}
   m_SizeDelta: {x: 617.9172, y: 72.5163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &944868383
@@ -2388,7 +2436,7 @@ Transform:
   m_GameObject: {fileID: 1200766176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -543.76404, y: -961.647, z: -0.062382832}
+  m_LocalPosition: {x: -543.76404, y: -1391, z: -0.062382832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3323,7 +3371,7 @@ GameObject:
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1842229506
 Transform:
   m_ObjectHideFlags: 0
@@ -3333,7 +3381,7 @@ Transform:
   m_GameObject: {fileID: 1842229505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -853.62, y: -1141.28, z: 0}
+  m_LocalPosition: {x: -853.62, y: -1141.28, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3472,7 +3520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 423.51, y: 768.04}
+  m_AnchoredPosition: {x: 423.51, y: 460.4699}
   m_SizeDelta: {x: 145.0326, y: 145.0326}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1870697227
@@ -3726,48 +3774,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7393978c9ebad15489236d16a0e98096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Zone: 0
   layers:
   - tiles:
-    - {fileID: 255728093}
-    - {fileID: 321239407}
-    - {fileID: 836876278}
+    - {fileID: 255728092}
+    - {fileID: 321239406}
+    - {fileID: 836876277}
     speed: 3.2
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 2037165412}
-    - {fileID: 592455370}
-    - {fileID: 1220316002}
+    - {fileID: 2037165411}
+    - {fileID: 592455369}
+    - {fileID: 1220316001}
     speed: 4.4
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 661627178}
-    - {fileID: 899400605}
-    - {fileID: 1429735128}
+    - {fileID: 661627177}
+    - {fileID: 899400604}
+    - {fileID: 1429735127}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 670478869}
-    - {fileID: 1679854689}
-    - {fileID: 1386706903}
+    - {fileID: 670478868}
+    - {fileID: 1679854688}
+    - {fileID: 1386706902}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 460001224}
-    - {fileID: 280281267}
-    - {fileID: 30376566}
+    - {fileID: 460001223}
+    - {fileID: 280281266}
+    - {fileID: 30376565}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 1897879915}
-    - {fileID: 1361582167}
-    - {fileID: 1720399193}
+    - {fileID: 1897879914}
+    - {fileID: 1361582166}
+    - {fileID: 1720399192}
     speed: 4.5
+    sprites: []
     spriteWidth: 0
   - tiles:
-    - {fileID: 255190102}
-    - {fileID: 1279227259}
-    - {fileID: 1203121670}
+    - {fileID: 255190101}
+    - {fileID: 1279227258}
+    - {fileID: 1203121669}
     speed: 6
+    sprites: []
     spriteWidth: 0
   stopParallax: 0
 --- !u!1 &2037165411
@@ -3887,6 +3943,7 @@ Transform:
   - {fileID: 2016951849}
   - {fileID: 61512772}
   - {fileID: 1586625852}
+  - {fileID: 637471039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

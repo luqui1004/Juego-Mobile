@@ -118,7 +118,7 @@ public class EnemyFinal : MonoBehaviour
         mainCamera.orthographicSize = originalCameraSize;
         mainCamera.transform.position = originalCameraPosition;
 
-        Destroy(gameObject);
+        gameObject.transform.position=new Vector3(100,100,100);
     }
 
     void DieLogic()

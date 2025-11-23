@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -33,9 +34,10 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private float shakeDuration = 0.2f;
 
     private Canvas mainCanvas;
-
+    private ScoreManager scoreManager;
     void Start()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
         mainCanvas = FindObjectOfType<Canvas>();
 
         if (playerAnimator != null)
@@ -130,8 +132,9 @@ public class PlayerInputs : MonoBehaviour
             if (isInsideHitZone)
             {
                 ShowFeedback("Perfect");
-
+                scoreManager.AddPoints(100,10);
                 EnemyFinal enemy = FindObjectOfType<EnemyFinal>();
+
                 if (enemy != null)
                     enemy.TakeDamage(1);
             }
