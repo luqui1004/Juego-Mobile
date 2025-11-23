@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -20,5 +21,14 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        die();
+    }
+
+    private void die()
+    {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("01. MainMenu");
+        }
     }
 }
