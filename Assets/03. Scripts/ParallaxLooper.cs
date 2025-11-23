@@ -6,6 +6,7 @@ public class ParallaxLayer
     public GameObject[] tiles;
     public float speed = 1f;
     public Sprite[] sprites;
+    public int multiplyer; 
 
     [HideInInspector] public float spriteWidth;
 }
@@ -32,7 +33,7 @@ public class ParallaxLooper : MonoBehaviour
             SpriteRenderer sr = layer.tiles[0].GetComponent<SpriteRenderer>();
             if (sr != null)
             {
-                layer.spriteWidth = sr.bounds.size.x;
+                layer.spriteWidth = sr.bounds.size.x * layer.multiplyer;
             }
         }
     }
@@ -94,6 +95,7 @@ public class ParallaxLooper : MonoBehaviour
         {
             sr.sprite = layer.sprites[safeIndex];
 
+            layer.spriteWidth = sr.bounds.size.x * layer.multiplyer;
         }
     }
 
