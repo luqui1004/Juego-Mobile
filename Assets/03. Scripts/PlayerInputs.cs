@@ -8,6 +8,8 @@ public class PlayerInputs : MonoBehaviour
     [Header("Config")]
     [SerializeField] private float tapMaxTime = 0.2f;
     [SerializeField] private float minSwipeDistance = 100;
+    [SerializeField] public int Damage = 1;
+    [SerializeField] public float DamageEnemy = 1f;
 
     [Header("Player")]
     [SerializeField] private Rigidbody2D playerRb;
@@ -35,10 +37,14 @@ public class PlayerInputs : MonoBehaviour
 
     private Canvas mainCanvas;
     private ScoreManager scoreManager;
+    [SerializeField] public PlayerHealth playerHealth;
+
+
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
         mainCanvas = FindObjectOfType<Canvas>();
+        playerHealth= FindObjectOfType<PlayerHealth>();
 
         if (playerAnimator != null)
             SetRunning(true);
@@ -132,15 +138,16 @@ public class PlayerInputs : MonoBehaviour
             if (isInsideHitZone)
             {
                 ShowFeedback("Perfect");
-                scoreManager.AddPoints(100,10);
+                scoreManager.AddScore(scoreManager.AddPoints, scoreManager.AddCoins);
                 EnemyFinal enemy = FindObjectOfType<EnemyFinal>();
 
                 if (enemy != null)
-                    enemy.TakeDamage(1);
+                    enemy.TakeDamage(Damage);
             }
             else
             {
                 ShowFeedback("Bad");
+                playerHealth.TakeDamage(DamageEnemy);
                 DoCameraShake();
             }
 
@@ -150,6 +157,7 @@ public class PlayerInputs : MonoBehaviour
         else
         {
             ShowFeedback("Bad");
+            playerHealth.TakeDamage(DamageEnemy);
             DoCameraShake();
         }
     }

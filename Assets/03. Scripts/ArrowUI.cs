@@ -74,6 +74,7 @@ public class ArrowUI : MonoBehaviour
             if (playerInputs != null)
             {
                 playerInputs.ShowFeedback("Bad");
+                playerInputs.playerHealth.TakeDamage(playerInputs.DamageEnemy);
             }
 
             Destroy(gameObject);
@@ -91,6 +92,7 @@ public class ArrowUI : MonoBehaviour
             if (playerInputs != null)
             {
                 playerInputs.ShowFeedback("Bad");
+                playerInputs.playerHealth.TakeDamage(playerInputs.DamageEnemy);
             }
         }
 

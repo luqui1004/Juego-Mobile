@@ -9,6 +9,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] int coins = 0;
     [SerializeField] TextMeshProUGUI Scoreboard;
     [SerializeField] TextMeshProUGUI Coinsboard;
+    [Header("ScoreboardPoints")]
+    [SerializeField] public int AddPoints;
+    [SerializeField] public int AddCoins;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +23,10 @@ public class ScoreManager : MonoBehaviour
         Scoreboard.text = "HIGH SCORE:" + points.ToString();
         Coinsboard.text = "COINS:"+coins.ToString();
     }
-    public void AddPoints(int amount,int Coins)
+    public void AddScore(int amount,int Coins)
     {
         points += amount;
         coins += Coins;
     }
+    public void LoseCoins(int amount) {  coins -= amount; }
 }
