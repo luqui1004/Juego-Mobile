@@ -17,18 +17,19 @@ public class EnemyFinal : MonoBehaviour
     private PlayerInputs playerInputs;
     private SpawnerEnemy spawnerEnemy;
     private ParallaxLooper parallaxLooper;
-    private Camera mainCamera;
+    //private Camera mainCamera;
 
     private bool combatStarted = false;
     private bool isMoving = true;
+    private CameraZoom zoom;
 
-    private Vector3 originalCameraPosition;
-    private float originalCameraSize;
+    //private Vector3 originalCameraPosition;
+    //private float originalCameraSize;
 
-    [Header("Zoom Config")]
-    [SerializeField] private float zoomSize = 4.3f;
-    [SerializeField] private float zoomDuration = 0.8f;
-    [SerializeField] private Vector3 zoomOffset = new Vector3(0f, -0.5f, 0f);
+    //[Header("Zoom Config")]
+    //[SerializeField] private float zoomSize = 4.3f;
+    //[SerializeField] private float zoomDuration = 0.8f;
+    //[SerializeField] private Vector3 zoomOffset = new Vector3(0f, -0.5f, 0f);
 
     void Start()
     {
@@ -51,13 +52,9 @@ public class EnemyFinal : MonoBehaviour
             spawnerEnemy = spawnerEnemyObj.GetComponent<SpawnerEnemy>();
 
         parallaxLooper = FindObjectOfType<ParallaxLooper>();
+        
+        zoom = FindObjectOfType<CameraZoom>();
 
-        mainCamera = Camera.main;
-        if (mainCamera != null)
-        {
-            originalCameraPosition = mainCamera.transform.position;
-            originalCameraSize = mainCamera.orthographicSize;
-        }
     }
 
     void Update()
@@ -94,8 +91,8 @@ public class EnemyFinal : MonoBehaviour
             parallaxLooper.stopParallax = true;
         }
 
-        if (mainCamera != null)
-            StartCoroutine(CameraZoomIn());
+        if (zoom.mainCamera != null)
+            StartCoroutine(zoom.CameraZoomIn());
 
         CombatManager.Instance.StartCombat();
     }
@@ -112,11 +109,10 @@ public class EnemyFinal : MonoBehaviour
     {
         DieLogic();
 
-        if (mainCamera != null)
-            yield return StartCoroutine(CameraZoomOut());
+        if (zoom.mainCamera != null)
+            yield return StartCoroutine(zoom.CameraZoomOut());
 
-        mainCamera.orthographicSize = originalCameraSize;
-        mainCamera.transform.position = originalCameraPosition;
+        zoom.death();
 
         gameObject.transform.position=new Vector3(100,100,100);
     }
@@ -166,39 +162,39 @@ public class EnemyFinal : MonoBehaviour
         Debug.Log("♻️ Referencias de enemigo reiniciadas correctamente.");
     }
 
-    IEnumerator CameraZoomIn()
-    {
-        float elapsed = 0f;
-        float startSize = mainCamera.orthographicSize;
-        Vector3 startPos = mainCamera.transform.position;
-        Vector3 targetPos = originalCameraPosition + zoomOffset;
+    //IEnumerator CameraZoomIn()
+    //{
+    //    float elapsed = 0f;
+    //    float startSize = mainCamera.orthographicSize;
+    //    Vector3 startPos = mainCamera.transform.position;
+    //    Vector3 targetPos = originalCameraPosition + zoomOffset;
 
-        while (elapsed < zoomDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, elapsed / zoomDuration);
-            mainCamera.orthographicSize = Mathf.Lerp(startSize, zoomSize, t);
-            mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, t);
-            yield return null;
-        }
-    }
+    //    while (elapsed < zoomDuration)
+    //    {
+    //        elapsed += Time.deltaTime;
+    //        float t = Mathf.SmoothStep(0, 1, elapsed / zoomDuration);
+    //        mainCamera.orthographicSize = Mathf.Lerp(startSize, zoomSize, t);
+    //        mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, t);
+    //        yield return null;
+    //    }
+    //}
 
-    IEnumerator CameraZoomOut()
-    {
-        float elapsed = 0f;
-        float startSize = mainCamera.orthographicSize;
-        Vector3 startPos = mainCamera.transform.position;
+    //IEnumerator CameraZoomOut()
+    //{
+    //    float elapsed = 0f;
+    //    float startSize = mainCamera.orthographicSize;
+    //    Vector3 startPos = mainCamera.transform.position;
 
-        while (elapsed < zoomDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, elapsed / zoomDuration);
-            mainCamera.orthographicSize = Mathf.Lerp(startSize, originalCameraSize, t);
-            mainCamera.transform.position = Vector3.Lerp(startPos, originalCameraPosition, t);
-            yield return null;
-        }
+    //    while (elapsed < zoomDuration)
+    //    {
+    //        elapsed += Time.deltaTime;
+    //        float t = Mathf.SmoothStep(0, 1, elapsed / zoomDuration);
+    //        mainCamera.orthographicSize = Mathf.Lerp(startSize, originalCameraSize, t);
+    //        mainCamera.transform.position = Vector3.Lerp(startPos, originalCameraPosition, t);
+    //        yield return null;
+    //    }
 
-        mainCamera.orthographicSize = originalCameraSize;
-        mainCamera.transform.position = originalCameraPosition;
-    }
+    //    mainCamera.orthographicSize = originalCameraSize;
+    //    mainCamera.transform.position = originalCameraPosition;
+    //}
 }
