@@ -25,6 +25,7 @@ public class ParallaxLooper : MonoBehaviour
 
     private void Start()
     {
+
         foreach (var layer in layers)
         {
             if (layer == null || layer.tiles == null || layer.tiles.Length < 2)
@@ -37,6 +38,7 @@ public class ParallaxLooper : MonoBehaviour
             }
         }
     }
+
 
     private void Update()
     {
@@ -69,7 +71,7 @@ public class ParallaxLooper : MonoBehaviour
                             rightMost = t.transform.position.x;
                     }
 
-                    
+
                     tile.position = new Vector3(
                         rightMost + layer.spriteWidth,
                         tile.position.y,
