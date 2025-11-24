@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
     [SerializeField] private GameObject touch;
+    [SerializeField] private GameObject shop;
+    [SerializeField] private RectTransform shopButtonArea;
 
     void Update()
     {
@@ -20,14 +22,23 @@ public class PlayerController : MonoBehaviour
         if (InputPlayer.Instance.SwipeDown)
             Roll();
 
-        if (InputPlayer.Instance.Touch)
-            BasicAttack();
-
         if (InputPlayer.Instance.SwipeLeft)
             MoveLeft();
 
         if (InputPlayer.Instance.SwipeRight)
             MoveRight();
+
+        if (InputPlayer.Instance.Touch)
+        {
+            if (IsTouchOn(shopButtonArea))
+            {
+                OpenShop();
+            }
+            else
+            {
+                BasicAttack();
+            }
+        }
     }
 
     private void Jump()
@@ -59,6 +70,25 @@ public class PlayerController : MonoBehaviour
         right.SetActive(true);
         StartCoroutine(DisableRight());
     }
+
+    private void OpenShop()
+    {
+        shop.SetActive(true);
+    }
+
+    private bool IsTouchOn(RectTransform rect)
+    {
+        if (Input.touchCount == 0)
+            return false;
+
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            rect,
+            Input.GetTouch(0).position,
+            null
+        );
+    }
+
+    //IENUMERATORS
 
     private IEnumerator DisableUp()
     {
