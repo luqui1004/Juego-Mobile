@@ -34,6 +34,9 @@ public class CombatController : MonoBehaviour
 
     public List<ArrowUI> activeArrows = new List<ArrowUI>();
 
+    [SerializeField] GameObject bad;
+    [SerializeField] GameObject perfect;
+
     public void StartCombat()
     {
         ClearAllArrows();
@@ -103,6 +106,23 @@ public class CombatController : MonoBehaviour
         spawnInterval = newInterval;
     }
 
+    public IEnumerator BadRoutine()
+    {
+
+        bad.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        bad.SetActive(false);
+
+    }
+    public IEnumerator PerfectRoutine()
+    {
+        perfect.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        perfect.SetActive(false);
+
+    }
+
+
 
 
 
@@ -141,12 +161,14 @@ public class CombatController : MonoBehaviour
                     insideTarget = true;
                     CombatController.Instance.currentArrowInTarget = arrowSet.arrowType;
                     CombatController.Instance.currentArrowUI = this;
+                    
                 }
             }
             else
             {
                 if (insideTarget)
                 {
+
                     insideTarget = false;
                 }
             }
@@ -178,8 +200,13 @@ public class CombatController : MonoBehaviour
 
             if (CombatController.Instance.currentEnemy != null)
             {
-                CombatController.Instance.currentEnemy.anim.SetTrigger("Attack");
+                CameraManager.Instance.DoShake(0.1f, 0.3f);
+                CombatController.Instance.currentEnemy.anim.SetTrigger("Attack"); 
+                StartCoroutine(CombatController.Instance.BadRoutine());
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+                
+
+                
             }
         }
     }

@@ -88,12 +88,14 @@ public class PlayerController : MonoBehaviour
             // PERFECT
             attackAction.Invoke();
             CombatController.Instance.currentEnemy?.TakeDamage();
+            StartCoroutine(CombatController.Instance.PerfectRoutine());
 
             CombatController.Instance.currentArrowUI?.DestroyArrow();
         }
         else
         {
             CombatController.Instance.MissByWrongSwipe();
+            StartCoroutine(CombatController.Instance.BadRoutine());
             ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
         }
 

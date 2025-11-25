@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int Health { get; private set; }
+    public float Health { get; private set; }
     public int Damage { get; private set; }
     public float SpeedArrow { get; private set; }
     public float IntervalArrow { get; private set; }
@@ -16,9 +16,15 @@ public class Enemy : MonoBehaviour
     //Animator
     [SerializeField] public Animator anim;
 
+    [SerializeField] public GameObject Coin;
+
     private void Awake()
     {
         anim = GetComponent<Animator>(); 
+    }
+    private void Start()
+    {
+        Coin = GameObject.Find("Coin");
     }
 
     public void Init(
@@ -83,6 +89,7 @@ public class Enemy : MonoBehaviour
         ScoreManager.Instance.AddScore(100);
         ScoreManager.Instance.AddCoins(50);
         anim.SetTrigger("Death"); //Anim de muerte.
+        Instantiate(Coin, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.5f);
     }
 }

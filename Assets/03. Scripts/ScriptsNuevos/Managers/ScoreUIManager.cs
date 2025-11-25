@@ -33,12 +33,12 @@ public class ScoreUIManager : MonoBehaviour
         coinsText.text = "COINS: " + value;
     }
 
-    public void UpdateDamage(int value)
+    public void UpdateDamage(float value)
     {
         damageText.text = value.ToString();
     }
 
-    public void UpdateShield(int value)
+    public void UpdateShield(float value)
     {
         shieldText.text = value.ToString();
     }

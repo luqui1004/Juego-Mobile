@@ -8,9 +8,9 @@ public class ScoreManager : MonoBehaviour
     public int Coins { get; private set; } = 10;
     public int Score { get; private set; }
 
-    public int Damage { get; private set; } = 1;
-    public int Shield { get; private set; } = 1;
-    public int Health { get; private set; } = 10;
+    public float Damage { get; private set; } = 1;
+    public float Shield { get; private set; } = 0;
+    public float Health { get; private set; } = 10;
 
     private ScoreUIManager ui;
 
@@ -74,7 +74,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddShield()
     {
-        Shield++;
+        Shield=+0.5f;
         ui?.UpdateShield(Shield);
     }
 
@@ -86,7 +86,7 @@ public class ScoreManager : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Health -= amount;
+        Health -= amount-Shield;
         if (Health < 0)
         {
             Health = 0;
