@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     public float Damage { get; private set; } = 1;
     public float Shield { get; private set; } = 0;
-    public float Health { get; private set; } = 10;
+    public float Health { get; private set; } = 100;
 
     private ScoreUIManager ui;
 
@@ -74,14 +74,14 @@ public class ScoreManager : MonoBehaviour
 
     public void AddShield()
     {
-        Shield=+0.5f;
+        Shield+=0.5f;
         ui?.UpdateShield(Shield);
     }
 
     public void RestoreHealth()
     {
-        Health = 10;
-        ui?.UpdateHealth(Health / 10f);
+        Health = 100;
+        ui?.UpdateHealth(Health / 100f);
     }
 
     public void TakeDamage(int amount)
@@ -93,6 +93,6 @@ public class ScoreManager : MonoBehaviour
             SceneManager.LoadScene("03. MainLose");
         }
 
-        ui?.UpdateHealth(Health / 10f);
+        ui?.UpdateHealth(Health / 100f);
     }
 }

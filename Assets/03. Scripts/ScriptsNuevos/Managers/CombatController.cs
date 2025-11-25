@@ -201,11 +201,9 @@ public class CombatController : MonoBehaviour
             if (CombatController.Instance.currentEnemy != null)
             {
                 CameraManager.Instance.DoShake(0.1f, 0.3f);
-                CombatController.Instance.currentEnemy.anim.SetTrigger("Attack"); 
+                //CombatController.Instance.currentEnemy.anim.SetTrigger("Attack"); 
                 StartCoroutine(CombatController.Instance.BadRoutine());
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
-                
-
                 
             }
         }
