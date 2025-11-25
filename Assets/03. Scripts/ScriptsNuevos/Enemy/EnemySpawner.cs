@@ -40,21 +40,21 @@ public class EnemySpawner : MonoBehaviour
         switch (type)
         {
             case EnemyType.Normal:
-                normalExtraHealth += 50;
+                normalExtraHealth += 5;
                 normalExtraDamage += 2;
                 normalExtraSpeed += 200f;
                 normalExtraInterval += 0.2f;
                 break;
 
             case EnemyType.Tank:
-                tankExtraHealth += 50;
+                tankExtraHealth += 5;
                 tankExtraDamage += 2;
                 tankExtraSpeed += 200f;
                 tankExtraInterval += 0.2f;
                 break;
 
             case EnemyType.Runner:
-                runnerExtraHealth += 50;
+                runnerExtraHealth += 5;
                 runnerExtraDamage += 2;
                 runnerExtraSpeed += 200f;
                 runnerExtraInterval += 0.2f;

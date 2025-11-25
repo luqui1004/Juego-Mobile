@@ -13,17 +13,6 @@ public class Enemy : MonoBehaviour
     private EnemySpawner.EnemyType myType;
     private PlayerController playerController;
 
-    private void Start()
-    {
-        StartCoroutine(AutoDieRoutine());
-    }
-
-    private System.Collections.IEnumerator AutoDieRoutine()
-    {
-        yield return new WaitForSeconds(2f);
-        Die();
-    }
-
     public void Init(
         EnemyStatsBase stats,
         int extraHealth,
@@ -57,13 +46,16 @@ public class Enemy : MonoBehaviour
             playerController.isInCombat = true;
             CombatController.Instance.SetCombatStats(SpeedArrow, IntervalArrow);
 
+            CombatController.Instance.currentEnemy = this;
+
             CombatController.Instance.StartCombat();
         }
     }
 
-    public void TakeDamage() 
-    { 
+    public void TakeDamage()
+    {
         Health -= ScoreManager.Instance.Damage;
+
         if (Health <= 0)
         {
             Die();
@@ -78,6 +70,10 @@ public class Enemy : MonoBehaviour
             playerController.isInCombat = false;
 
         spawner.OnEnemyKilled(myType);
+
+        ScoreManager.Instance.AddScore(100);
+        ScoreManager.Instance.AddCoins(50);
+
         Destroy(gameObject);
     }
 }

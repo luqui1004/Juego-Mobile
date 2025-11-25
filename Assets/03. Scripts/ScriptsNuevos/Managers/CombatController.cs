@@ -21,15 +21,26 @@ public class CombatController : MonoBehaviour
     public List<GameObject> arrowPrefabs;
     public RectTransform spawnPoint;
     public RectTransform despawnPoint;
+    public RectTransform targetZone;
 
     [Header("Spawn Settings")]
     public float spawnInterval = 1.5f;
 
     private Coroutine spawnRoutine;
 
+    public ArrowSet.ArrowType? currentArrowInTarget = null;
+
+    public ArrowUI currentArrowUI;
+
+    public Enemy currentEnemy;
+
+
     public void StartCombat()
     {
         ClearAllArrows();
+
+        currentArrowUI = null;
+        currentArrowInTarget = null;
 
         combatUI.SetActive(true);
         spawnRoutine = StartCoroutine(SpawnRoutine());
@@ -41,6 +52,10 @@ public class CombatController : MonoBehaviour
             StopCoroutine(spawnRoutine);
 
         ClearAllArrows();
+        currentArrowInTarget = null;
+        currentArrowUI = null;
+
+        currentEnemy = null;
 
         combatUI.SetActive(false);
     }
@@ -73,39 +88,89 @@ public class CombatController : MonoBehaviour
 
         rt.anchoredPosition = spawnPoint.anchoredPosition;
 
-        ArrowUI despawn = arrowGO.AddComponent<ArrowUI>();
-        despawn.despawnPoint = despawnPoint;
+        ArrowUI arrow = arrowGO.AddComponent<ArrowUI>();
+        arrow.despawnPoint = despawnPoint;
+        arrow.targetZone = targetZone;
+
+        currentArrowUI = arrow;
     }
 
     public void SetCombatStats(float newSpeed, float newInterval)
     {
-        // Cambiar velocidad de flecha
         ArrowUI.arrowSpeed = newSpeed;
-
-        // Cambiar intervalo de spawn
         spawnInterval = newInterval;
     }
 
 
-    // CLASE INTERNA SOLO PARA EL DESPAWN
-    private class ArrowUI : MonoBehaviour
+    // ---- CLASE INTERNA ----
+    public class ArrowUI : MonoBehaviour
     {
         public static float arrowSpeed = 2f;
 
         public RectTransform despawnPoint;
+        public RectTransform targetZone;
+
         private RectTransform rt;
+        private ArrowSet arrowSet;
+        private bool insideTarget = false;
 
         private void Awake()
         {
             rt = GetComponent<RectTransform>();
+            arrowSet = GetComponent<ArrowSet>();
         }
 
         private void Update()
         {
+            // movimiento
             rt.anchoredPosition += Vector2.right * arrowSpeed * Time.deltaTime;
 
+            // despawn
             if (rt.anchoredPosition.x > despawnPoint.anchoredPosition.x)
+            {
+                if (insideTarget)
+                {
+                    CombatController.Instance.currentArrowInTarget = null;
+                    CombatController.Instance.currentArrowUI = null;
+                }
+
                 Destroy(gameObject);
+            }
+
+            // detectar target
+            if (IsInsideTarget())
+            {
+                if (!insideTarget)
+                {
+                    insideTarget = true;
+                    CombatController.Instance.currentArrowInTarget = arrowSet.arrowType;
+
+                    CombatController.Instance.currentArrowUI = this;
+                }
+            }
+            else
+            {
+                if (insideTarget)
+                {
+                    insideTarget = false;
+                    CombatController.Instance.currentArrowInTarget = null;
+                    CombatController.Instance.currentArrowUI = null;
+                }
+            }
+        }
+
+        private bool IsInsideTarget()
+        {
+            float halfWidth = targetZone.rect.width / 2f;
+            return Mathf.Abs(rt.anchoredPosition.x - targetZone.anchoredPosition.x) < halfWidth;
+        }
+
+        public void DestroyArrow()
+        {
+            CombatController.Instance.currentArrowInTarget = null;
+            CombatController.Instance.currentArrowUI = null;
+
+            Destroy(gameObject);
         }
     }
 }

@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
         if (InputManager.Instance == null)
             return;
 
-        if (isInShop == false)
+        if (!isInShop)
         {
-            if (isInCombat == false)
+            if (!isInCombat)
             {
                 if (InputManager.Instance.Touch)
                 {
@@ -37,21 +37,24 @@ public class PlayerController : MonoBehaviour
                         Jump();
                 }
             }
-            
-            if (isInCombat == true)
+
+            if (isInCombat)
             {
                 if (InputManager.Instance.SwipeUp)
-                    AttackUp();
+                    TryPerfect(ArrowSet.ArrowType.Up, AttackUp);
+
                 if (InputManager.Instance.SwipeDown)
-                    AttackDown();
+                    TryPerfect(ArrowSet.ArrowType.Down, AttackDown);
+
                 if (InputManager.Instance.SwipeLeft)
-                    AttackLeft();
+                    TryPerfect(ArrowSet.ArrowType.Left, AttackLeft);
+
                 if (InputManager.Instance.SwipeRight)
-                    AttackRight();              
+                    TryPerfect(ArrowSet.ArrowType.Right, AttackRight);
             }
-            
         }
-        if (isInShop == true)
+
+        if (isInShop)
         {
             if (InputManager.Instance.Touch)
             {
@@ -70,31 +73,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void TryPerfect(ArrowSet.ArrowType swipeType, System.Action attackAction)
+    {
+        var current = CombatController.Instance.currentArrowInTarget;
+
+        if (current.HasValue && current.Value == swipeType)
+        {
+            attackAction.Invoke(); // PERFECT
+
+            CombatController.Instance.currentEnemy?.TakeDamage();
+
+            var arrow = CombatController.Instance.currentArrowUI;
+            if (arrow != null)
+            {
+                arrow.DestroyArrow();
+            }
+        }
+    }
+
+
     private void AttackUp()
     {
         up.SetActive(true);
-        ScoreManager.Instance.AddScore(100);
         StartCoroutine(DisableUp());
     }
 
     private void AttackDown()
     {
         down.SetActive(true);
-        ScoreManager.Instance.RemoveScore(100);
         StartCoroutine(DisableDown());
     }
 
     private void AttackLeft()
     {
         left.SetActive(true);
-        ScoreManager.Instance.AddCoins(100);
         StartCoroutine(DisableLeft());
     }
 
     private void AttackRight()
     {
         right.SetActive(true);
-        ScoreManager.Instance.RemoveCoins(100);
         StartCoroutine(DisableRight());
     }
 
