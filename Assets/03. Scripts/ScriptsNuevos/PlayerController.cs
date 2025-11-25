@@ -13,22 +13,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (InputPlayer.Instance == null)
+        if (InputManager.Instance == null)
             return;
 
-        if (InputPlayer.Instance.SwipeUp)
+        if (InputManager.Instance.SwipeUp)
             Jump();
 
-        if (InputPlayer.Instance.SwipeDown)
+        if (InputManager.Instance.SwipeDown)
             Roll();
 
-        if (InputPlayer.Instance.SwipeLeft)
+        if (InputManager.Instance.SwipeLeft)
             MoveLeft();
 
-        if (InputPlayer.Instance.SwipeRight)
+        if (InputManager.Instance.SwipeRight)
             MoveRight();
 
-        if (InputPlayer.Instance.Touch)
+        if (InputManager.Instance.Touch)
         {
             if (IsTouchOn(shopButtonArea))
             {
@@ -44,12 +44,14 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         up.SetActive(true);
+        ScoreManager.Instance.AddScore(100);
         StartCoroutine(DisableUp());
     }
 
     private void Roll()
     {
         down.SetActive(true);
+        ScoreManager.Instance.RemoveScore(100);
         StartCoroutine(DisableDown());
     }
 
@@ -62,12 +64,14 @@ public class PlayerController : MonoBehaviour
     private void MoveLeft()
     {
         left.SetActive(true);
+        ScoreManager.Instance.AddCoins(100); 
         StartCoroutine(DisableLeft());
     }
 
     private void MoveRight()
     {
         right.SetActive(true);
+        ScoreManager.Instance.RemoveCoins(100);
         StartCoroutine(DisableRight());
     }
 

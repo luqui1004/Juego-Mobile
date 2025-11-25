@@ -138,7 +138,7 @@ public class PlayerInputs : MonoBehaviour
             if (isInsideHitZone)
             {
                 ShowFeedback("Perfect");
-                scoreManager.AddScore(scoreManager.AddPoints, scoreManager.AddCoins);
+                //scoreManager.AddScore(scoreManager.AddPoints, scoreManager.AddCoins);
                 EnemyFinal enemy = FindObjectOfType<EnemyFinal>();
 
                 if (enemy != null)

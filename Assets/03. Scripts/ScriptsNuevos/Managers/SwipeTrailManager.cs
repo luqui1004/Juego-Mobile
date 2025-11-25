@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwipeTrail : MonoBehaviour
+public class SwipeTrailManager : MonoBehaviour
 {
     public Camera cam;
     public GameObject trailPrefab;

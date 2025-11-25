@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class InputPlayer : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    public static InputPlayer Instance;
+    public static InputManager Instance;
 
     [Header("Swipe")]
     public float minSwipeDistance = 50f;
