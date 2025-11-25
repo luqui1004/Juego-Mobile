@@ -11,6 +11,18 @@ public class Enemy : MonoBehaviour
 
     private EnemySpawner spawner;
     private EnemySpawner.EnemyType myType;
+    private PlayerController playerController;
+
+    private void Start()
+    {
+        StartCoroutine(AutoDieRoutine());
+    }
+
+    private System.Collections.IEnumerator AutoDieRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        Die();
+    }
 
     public void Init(
         EnemyStatsBase stats,
@@ -30,12 +42,6 @@ public class Enemy : MonoBehaviour
         IntervalArrow = Mathf.Max(0.1f, stats.baseIntervalArrow - extraInterval);
     }
 
-    //void Start()
-    //{
-    //    // TEST: matar después de 2s
-    //    Invoke(nameof(Die), 2f);
-    //}
-
     void Update()
     {
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
@@ -45,8 +51,13 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerController = other.GetComponent<PlayerController>();
+
             moveSpeed = 0f;
-            //iniciarCombate
+            playerController.isInCombat = true;
+            CombatController.Instance.SetCombatStats(SpeedArrow, IntervalArrow);
+
+            CombatController.Instance.StartCombat();
         }
     }
 
@@ -57,12 +68,15 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-            
     }
 
     private void Die()
     {
-        //terminarcombate
+        CombatController.Instance.EndCombat();
+
+        if (playerController != null)
+            playerController.isInCombat = false;
+
         spawner.OnEnemyKilled(myType);
         Destroy(gameObject);
     }

@@ -2564,18 +2564,18 @@ MonoBehaviour:
   normalStats:
     baseHealth: 100
     damage: 15
-    baseSpeedArrow: 500
+    baseSpeedArrow: 250
     baseIntervalArrow: 1
   tankStats:
     baseHealth: 200
     damage: 20
-    baseSpeedArrow: 3
-    baseIntervalArrow: 1.5
+    baseSpeedArrow: 250
+    baseIntervalArrow: 1
   runnerStats:
     baseHealth: 100
     damage: 5
-    baseSpeedArrow: 4
-    baseIntervalArrow: 1.5
+    baseSpeedArrow: 300
+    baseIntervalArrow: 1
   normalExtraHealth: 0
   normalExtraDamage: 0
   normalExtraSpeed: 0
@@ -4664,6 +4664,7 @@ MonoBehaviour:
   purchaseDamageButton: {fileID: 438852955}
   purchaseShieldButton: {fileID: 1109229889}
   purchaseHealthButton: {fileID: 607723349}
+  isInCombat: 0
 --- !u!1 &1167066843
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,6 +7079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2115712770}
+  - component: {fileID: 2115712771}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -7100,6 +7102,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444183833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2115712771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115712769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41db7d1467e402a4181db8d09b3a4259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatUI: {fileID: 1373942304}
+  arrowPrefabs:
+  - {fileID: 6219199441424844337, guid: 7d7a5091edb283742a01d5cdfe310db1, type: 3}
+  - {fileID: 5873171258951977690, guid: d4df18678fffa8f4686e472722519649, type: 3}
+  - {fileID: 979511940011820420, guid: 6c48ce511317a8341b716a5d4d954957, type: 3}
+  - {fileID: 7208791657170484452, guid: 72c49e11ff4d51142b61d92e2aa2e626, type: 3}
+  spawnPoint: {fileID: 1628583460}
+  despawnPoint: {fileID: 610435238}
+  spawnInterval: 1.5
 --- !u!1 &2140764192
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RectTransform purchaseShieldButton;
     [SerializeField] private RectTransform purchaseHealthButton;
 
+    public bool isInCombat = false;
     bool isInShop = false;
 
     void Update()
@@ -24,26 +25,33 @@ public class PlayerController : MonoBehaviour
         if (InputManager.Instance == null)
             return;
 
-        if (!isInShop)
+        if (isInShop == false)
         {
-            if (InputManager.Instance.SwipeUp)
-                AttackUp();
-            if (InputManager.Instance.SwipeDown)
-                AttackDown();
-            if (InputManager.Instance.SwipeLeft)
-                AttackLeft();
-            if (InputManager.Instance.SwipeRight)
-                AttackRight();
-
-            if (InputManager.Instance.Touch)
+            if (isInCombat == false)
             {
-                if (IsTouchOn(shopButtonArea))
-                    OpenShop();
-                else
-                    Jump();
+                if (InputManager.Instance.Touch)
+                {
+                    if (IsTouchOn(shopButtonArea))
+                        OpenShop();
+                    else
+                        Jump();
+                }
             }
+            
+            if (isInCombat == true)
+            {
+                if (InputManager.Instance.SwipeUp)
+                    AttackUp();
+                if (InputManager.Instance.SwipeDown)
+                    AttackDown();
+                if (InputManager.Instance.SwipeLeft)
+                    AttackLeft();
+                if (InputManager.Instance.SwipeRight)
+                    AttackRight();              
+            }
+            
         }
-        else
+        if (isInShop == true)
         {
             if (InputManager.Instance.Touch)
             {
