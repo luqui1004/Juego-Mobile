@@ -32,6 +32,11 @@ public class CombatController : MonoBehaviour
     public ArrowUI currentArrowUI;
     public Enemy currentEnemy;
 
+    public List<ArrowUI> activeArrows = new List<ArrowUI>();
+
+
+
+
     public void StartCombat()
     {
         ClearAllArrows();
@@ -49,9 +54,9 @@ public class CombatController : MonoBehaviour
             StopCoroutine(spawnRoutine);
 
         ClearAllArrows();
+
         currentArrowInTarget = null;
         currentArrowUI = null;
-
         currentEnemy = null;
 
         combatUI.SetActive(false);
@@ -59,11 +64,12 @@ public class CombatController : MonoBehaviour
 
     private void ClearAllArrows()
     {
-        ArrowUI[] arrows = FindObjectsOfType<ArrowUI>();
+        foreach (var a in activeArrows)
+            if (a != null) Destroy(a.gameObject);
 
-        foreach (var a in arrows)
-            Destroy(a.gameObject);
+        activeArrows.Clear();
     }
+
 
     private IEnumerator SpawnRoutine()
     {
@@ -89,6 +95,8 @@ public class CombatController : MonoBehaviour
         arrow.despawnPoint = despawnPoint;
         arrow.targetZone = targetZone;
 
+        activeArrows.Add(arrow);
+
         currentArrowUI = arrow;
     }
 
@@ -99,7 +107,8 @@ public class CombatController : MonoBehaviour
     }
 
 
-    // -------- ARROW UI ----------
+
+
     public class ArrowUI : MonoBehaviour
     {
         public static float arrowSpeed = 2f;
@@ -110,7 +119,6 @@ public class CombatController : MonoBehaviour
         private RectTransform rt;
         private ArrowSet arrowSet;
         private bool insideTarget = false;
-        public bool processed = false;
 
         private void Awake()
         {
@@ -125,7 +133,7 @@ public class CombatController : MonoBehaviour
             if (rt.anchoredPosition.x > despawnPoint.anchoredPosition.x)
             {
                 Miss();
-                Destroy(gameObject);
+                DestroyArrow();
                 return;
             }
 
@@ -155,19 +163,51 @@ public class CombatController : MonoBehaviour
 
         public void DestroyArrow()
         {
-            CombatController.Instance.currentArrowInTarget = null;
-            CombatController.Instance.currentArrowUI = null;
+            CombatController.Instance.activeArrows.Remove(this);
+
+            if (CombatController.Instance.currentArrowUI == this)
+            {
+                CombatController.Instance.currentArrowInTarget = null;
+                CombatController.Instance.currentArrowUI = null;
+            }
 
             Destroy(gameObject);
         }
 
-        private void Miss()
+        public void Miss()
         {
             CombatController.Instance.currentArrowInTarget = null;
             CombatController.Instance.currentArrowUI = null;
 
             if (CombatController.Instance.currentEnemy != null)
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+        }
+    }
+
+    public void MissByWrongSwipe()
+    {
+        if (activeArrows.Count == 0) return;
+
+        ArrowUI closest = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var a in activeArrows)
+        {
+            if (a == null) continue;
+
+            float distance = Mathf.Abs(a.GetComponent<RectTransform>().anchoredPosition.x - targetZone.anchoredPosition.x);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = a;
+            }
+        }
+
+        if (closest != null)
+        {
+            closest.Miss();
+            closest.DestroyArrow();
         }
     }
 }

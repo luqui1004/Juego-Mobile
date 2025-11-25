@@ -75,28 +75,32 @@ public class PlayerController : MonoBehaviour
     private void TryPerfect(ArrowSet.ArrowType swipeType, System.Action attackAction)
     {
         var current = CombatController.Instance.currentArrowInTarget;
-        var arrow = CombatController.Instance.currentArrowUI;
 
-        if (arrow == null)
-            return;
-
-        if (arrow.processed)
-            return;
-
-        arrow.processed = true;
-
-        if (current.HasValue && current.Value == swipeType)
+        if (!current.HasValue)
         {
+            CombatController.Instance.MissByWrongSwipe();
+            ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+            return;
+        }
+
+        if (current.Value == swipeType)
+        {
+            // PERFECT
             attackAction.Invoke();
             CombatController.Instance.currentEnemy?.TakeDamage();
-            arrow.DestroyArrow();
+
+            CombatController.Instance.currentArrowUI?.DestroyArrow();
         }
         else
         {
+            CombatController.Instance.MissByWrongSwipe();
             ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
-            arrow.DestroyArrow();
         }
+
+        CombatController.Instance.currentArrowInTarget = null;
+        CombatController.Instance.currentArrowUI = null;
     }
+
 
     private void AttackUp()
     {
@@ -128,6 +132,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DisableTouch());
     }
 
+
     private void OpenShop()
     {
         shop.SetActive(true);
@@ -144,6 +149,7 @@ public class PlayerController : MonoBehaviour
     private void PurchaseShield() => ShopManager.Instance.TryBuyShield();
     private void PurchaseHealth() => ShopManager.Instance.TryBuyHealth();
 
+
     private bool IsTouchOn(RectTransform rect)
     {
         if (Input.touchCount == 0)
@@ -155,6 +161,7 @@ public class PlayerController : MonoBehaviour
             null
         );
     }
+
 
     private IEnumerator DisableUp()
     {
