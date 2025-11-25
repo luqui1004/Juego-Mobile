@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01. Scenes/02. MainLevel.unity
     guid: 030fc39fe777da343abf885e7405adf9
+  - enabled: 1
+    path: Assets/01. Scenes/03. MainLose.unity
+    guid: e4c2862d0f548ae4aa3c645ef873a2f6
   m_configObjects: {}

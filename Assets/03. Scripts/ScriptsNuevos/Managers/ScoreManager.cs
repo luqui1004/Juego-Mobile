@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -86,7 +87,11 @@ public class ScoreManager : MonoBehaviour
     public void TakeDamage(int amount)
     {
         Health -= amount;
-        if (Health < 0) Health = 0;
+        if (Health < 0)
+        {
+            Health = 0;
+            SceneManager.LoadScene("03. MainLose");
+        }
 
         ui?.UpdateHealth(Health / 10f);
     }

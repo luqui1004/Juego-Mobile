@@ -7,10 +7,13 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene("02. MainLevel");
     }
-
-    // Sale del juego
+    //Sale del juego
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene("01. MainMenu");
     }
 }
