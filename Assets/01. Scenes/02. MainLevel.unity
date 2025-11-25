@@ -2565,17 +2565,17 @@ MonoBehaviour:
   normalStats:
     baseHealth: 1
     damage: 1
-    baseSpeedArrow: 50
+    baseSpeedArrow: 200
     baseIntervalArrow: 1
   tankStats:
     baseHealth: 3
     damage: 1
-    baseSpeedArrow: 100
+    baseSpeedArrow: 250
     baseIntervalArrow: 1
   runnerStats:
     baseHealth: 5
     damage: 2
-    baseSpeedArrow: 250
+    baseSpeedArrow: 350
     baseIntervalArrow: 1
   normalExtraHealth: 0
   normalExtraDamage: 0

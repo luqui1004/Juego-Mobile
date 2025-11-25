@@ -34,9 +34,6 @@ public class CombatController : MonoBehaviour
 
     public List<ArrowUI> activeArrows = new List<ArrowUI>();
 
-
-
-
     public void StartCombat()
     {
         ClearAllArrows();
@@ -180,7 +177,10 @@ public class CombatController : MonoBehaviour
             CombatController.Instance.currentArrowUI = null;
 
             if (CombatController.Instance.currentEnemy != null)
+            {
+                CombatController.Instance.currentEnemy.anim.SetTrigger("Attack");
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+            }
         }
     }
 

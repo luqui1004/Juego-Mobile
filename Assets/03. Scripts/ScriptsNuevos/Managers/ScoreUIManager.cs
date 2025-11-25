@@ -20,7 +20,7 @@ public class ScoreUIManager : MonoBehaviour
 
         UpdateDamage(ScoreManager.Instance.Damage);
         UpdateShield(ScoreManager.Instance.Shield);
-        UpdateHealth(ScoreManager.Instance.Health / 100f);
+        UpdateHealth(ScoreManager.Instance.Health / 10f);
     }
 
     public void UpdateScore(int value)

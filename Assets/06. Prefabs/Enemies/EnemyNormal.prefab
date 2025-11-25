@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  anim: {fileID: 3833960950803095549}
 --- !u!50 &3172098040745413865
 Rigidbody2D:
   serializedVersion: 4
@@ -157,10 +158,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.57057506, y: 0.0032342076}
+  m_Offset: {x: -0.4166124, y: 0.0032342076}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -171,7 +172,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5962753, y: 0.95852876}
+  m_Size: {x: 1.2883499, y: 0.95852876}
   m_EdgeRadius: 0
 --- !u!95 &3833960950803095549
 Animator:

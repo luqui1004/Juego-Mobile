@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 
     public int Damage { get; private set; } = 1;
     public int Shield { get; private set; } = 1;
-    public int Health { get; private set; } = 100;
+    public int Health { get; private set; } = 10;
 
     private ScoreUIManager ui;
 
@@ -79,8 +79,8 @@ public class ScoreManager : MonoBehaviour
 
     public void RestoreHealth()
     {
-        Health = 100;
-        ui?.UpdateHealth(Health / 100f);
+        Health = 10;
+        ui?.UpdateHealth(Health / 10f);
     }
 
     public void TakeDamage(int amount)
@@ -88,6 +88,6 @@ public class ScoreManager : MonoBehaviour
         Health -= amount;
         if (Health < 0) Health = 0;
 
-        ui?.UpdateHealth(Health / 100f);
+        ui?.UpdateHealth(Health / 10f);
     }
 }

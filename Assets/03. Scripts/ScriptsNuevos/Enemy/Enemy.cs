@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private PlayerController playerController;
 
     //Animator
-    private Animator anim;
+    [SerializeField] public Animator anim;
 
     private void Awake()
     {
@@ -50,9 +50,8 @@ public class Enemy : MonoBehaviour
         {
             playerController = other.GetComponent<PlayerController>();
 
-            moveSpeed = 0f;
+            moveSpeed = 0.000000000001f;
             playerController.isInCombat = true;
-            anim.SetTrigger("Attack"); //Anim de atq.
             CombatController.Instance.SetCombatStats(SpeedArrow, IntervalArrow);
 
             CombatController.Instance.currentEnemy = this;
@@ -60,6 +59,7 @@ public class Enemy : MonoBehaviour
             CombatController.Instance.StartCombat();
         }
     }
+
 
     public void TakeDamage()
     {
