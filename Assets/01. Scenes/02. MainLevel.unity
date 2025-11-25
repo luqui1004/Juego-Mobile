@@ -2563,12 +2563,12 @@ MonoBehaviour:
   runnerPrefab: {fileID: 7864828506939442213, guid: 4eb594ff228843247bffb9fc1c3708fd, type: 3}
   normalStats:
     baseHealth: 10
-    damage: 15
+    damage: 5
     baseSpeedArrow: 250
     baseIntervalArrow: 1
   tankStats:
     baseHealth: 20
-    damage: 20
+    damage: 7
     baseSpeedArrow: 250
     baseIntervalArrow: 1
   runnerStats:
@@ -7200,6 +7200,7 @@ MonoBehaviour:
   despawnPoint: {fileID: 610435238}
   targetZone: {fileID: 1206434767}
   spawnInterval: 1.5
+  currentArrowUI: {fileID: 0}
   currentEnemy: {fileID: 0}
 --- !u!1 &2140764192
 GameObject:

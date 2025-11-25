@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 
     public int Damage { get; private set; } = 1;
     public int Shield { get; private set; } = 1;
-    public int Health { get; private set; } = 50;
+    public int Health { get; private set; } = 100;
 
     private ScoreUIManager ui;
 

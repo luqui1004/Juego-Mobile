@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject jump;
     [SerializeField] private GameObject shop;
 
-    //buttons area
     [SerializeField] private RectTransform shopButtonArea;
     [SerializeField] private RectTransform closeShopButtonArea;
     [SerializeField] private RectTransform purchaseDamageButton;
@@ -76,21 +75,28 @@ public class PlayerController : MonoBehaviour
     private void TryPerfect(ArrowSet.ArrowType swipeType, System.Action attackAction)
     {
         var current = CombatController.Instance.currentArrowInTarget;
+        var arrow = CombatController.Instance.currentArrowUI;
+
+        if (arrow == null)
+            return;
+
+        if (arrow.processed)
+            return;
+
+        arrow.processed = true;
 
         if (current.HasValue && current.Value == swipeType)
         {
-            attackAction.Invoke(); // PERFECT
-
+            attackAction.Invoke();
             CombatController.Instance.currentEnemy?.TakeDamage();
-
-            var arrow = CombatController.Instance.currentArrowUI;
-            if (arrow != null)
-            {
-                arrow.DestroyArrow();
-            }
+            arrow.DestroyArrow();
+        }
+        else
+        {
+            ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+            arrow.DestroyArrow();
         }
     }
-
 
     private void AttackUp()
     {
@@ -134,20 +140,9 @@ public class PlayerController : MonoBehaviour
         isInShop = false;
     }
 
-    private void PurchaseDamage()
-    {
-        ShopManager.Instance.TryBuyDamage();
-    }
-
-    private void PurchaseShield()
-    {
-        ShopManager.Instance.TryBuyShield();
-    }
-
-    private void PurchaseHealth()
-    {
-        ShopManager.Instance.TryBuyHealth();
-    }
+    private void PurchaseDamage() => ShopManager.Instance.TryBuyDamage();
+    private void PurchaseShield() => ShopManager.Instance.TryBuyShield();
+    private void PurchaseHealth() => ShopManager.Instance.TryBuyHealth();
 
     private bool IsTouchOn(RectTransform rect)
     {

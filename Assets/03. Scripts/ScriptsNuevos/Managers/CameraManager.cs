@@ -115,7 +115,9 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator ShakeRoutine(float intensity, float duration)
     {
-        Vector3 basePos = mainCamera.transform.localPosition;
+        // Guardamos la posición ACTUAL de la cámara al iniciar el shake
+        Vector3 startPos = mainCamera.transform.position;
+
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -123,12 +125,14 @@ public class CameraManager : MonoBehaviour
             float x = Random.Range(-1f, 1f) * intensity;
             float y = Random.Range(-1f, 1f) * intensity;
 
-            mainCamera.transform.localPosition = new Vector3(basePos.x + x, basePos.y + y, basePos.z);
+            // Shake RELATIVO Y CONTROLADO
+            mainCamera.transform.position = startPos + new Vector3(x, y, 0);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        mainCamera.transform.localPosition = basePos;
+        // Al terminar, volver EXACTAMENTE al lugar correcto
+        mainCamera.transform.position = startPos;
     }
 }

@@ -29,11 +29,8 @@ public class CombatController : MonoBehaviour
     private Coroutine spawnRoutine;
 
     public ArrowSet.ArrowType? currentArrowInTarget = null;
-
     public ArrowUI currentArrowUI;
-
     public Enemy currentEnemy;
-
 
     public void StartCombat()
     {
@@ -102,7 +99,7 @@ public class CombatController : MonoBehaviour
     }
 
 
-    // ---- CLASE INTERNA ----
+    // -------- ARROW UI ----------
     public class ArrowUI : MonoBehaviour
     {
         public static float arrowSpeed = 2f;
@@ -113,6 +110,7 @@ public class CombatController : MonoBehaviour
         private RectTransform rt;
         private ArrowSet arrowSet;
         private bool insideTarget = false;
+        public bool processed = false;
 
         private void Awake()
         {
@@ -122,29 +120,21 @@ public class CombatController : MonoBehaviour
 
         private void Update()
         {
-            // movimiento
             rt.anchoredPosition += Vector2.right * arrowSpeed * Time.deltaTime;
 
-            // despawn
             if (rt.anchoredPosition.x > despawnPoint.anchoredPosition.x)
             {
-                if (insideTarget)
-                {
-                    CombatController.Instance.currentArrowInTarget = null;
-                    CombatController.Instance.currentArrowUI = null;
-                }
-
+                Miss();
                 Destroy(gameObject);
+                return;
             }
 
-            // detectar target
             if (IsInsideTarget())
             {
                 if (!insideTarget)
                 {
                     insideTarget = true;
                     CombatController.Instance.currentArrowInTarget = arrowSet.arrowType;
-
                     CombatController.Instance.currentArrowUI = this;
                 }
             }
@@ -153,8 +143,6 @@ public class CombatController : MonoBehaviour
                 if (insideTarget)
                 {
                     insideTarget = false;
-                    CombatController.Instance.currentArrowInTarget = null;
-                    CombatController.Instance.currentArrowUI = null;
                 }
             }
         }
@@ -171,6 +159,15 @@ public class CombatController : MonoBehaviour
             CombatController.Instance.currentArrowUI = null;
 
             Destroy(gameObject);
+        }
+
+        private void Miss()
+        {
+            CombatController.Instance.currentArrowInTarget = null;
+            CombatController.Instance.currentArrowUI = null;
+
+            if (CombatController.Instance.currentEnemy != null)
+                ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
         }
     }
 }
