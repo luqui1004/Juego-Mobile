@@ -2563,19 +2563,19 @@ MonoBehaviour:
   tankPrefab: {fileID: 8204463598024162732, guid: 827d8aaaa2d29ed419f2a216013f2c96, type: 3}
   runnerPrefab: {fileID: 7864828506939442213, guid: 4eb594ff228843247bffb9fc1c3708fd, type: 3}
   normalStats:
-    baseHealth: 10
-    damage: 5
-    baseSpeedArrow: 250
+    baseHealth: 1
+    damage: 1
+    baseSpeedArrow: 50
     baseIntervalArrow: 1
   tankStats:
-    baseHealth: 20
-    damage: 7
-    baseSpeedArrow: 250
+    baseHealth: 3
+    damage: 1
+    baseSpeedArrow: 100
     baseIntervalArrow: 1
   runnerStats:
-    baseHealth: 10
-    damage: 5
-    baseSpeedArrow: 300
+    baseHealth: 5
+    damage: 2
+    baseSpeedArrow: 250
     baseIntervalArrow: 1
   normalExtraHealth: 0
   normalExtraDamage: 0
@@ -7247,6 +7247,7 @@ MonoBehaviour:
   spawnInterval: 1.5
   currentArrowUI: {fileID: 0}
   currentEnemy: {fileID: 0}
+  activeArrows: []
 --- !u!1 &2140764192
 GameObject:
   m_ObjectHideFlags: 0

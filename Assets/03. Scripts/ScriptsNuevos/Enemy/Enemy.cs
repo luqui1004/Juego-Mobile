@@ -13,6 +13,14 @@ public class Enemy : MonoBehaviour
     private EnemySpawner.EnemyType myType;
     private PlayerController playerController;
 
+    //Animator
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>(); 
+    }
+
     public void Init(
         EnemyStatsBase stats,
         int extraHealth,
@@ -44,6 +52,7 @@ public class Enemy : MonoBehaviour
 
             moveSpeed = 0f;
             playerController.isInCombat = true;
+            anim.SetTrigger("Attack"); //Anim de atq.
             CombatController.Instance.SetCombatStats(SpeedArrow, IntervalArrow);
 
             CombatController.Instance.currentEnemy = this;
@@ -73,7 +82,7 @@ public class Enemy : MonoBehaviour
 
         ScoreManager.Instance.AddScore(100);
         ScoreManager.Instance.AddCoins(50);
-
-        Destroy(gameObject);
+        anim.SetTrigger("Death"); //Anim de muerte.
+        Destroy(gameObject, 0.5f);
     }
 }
