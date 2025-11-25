@@ -4,25 +4,50 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    public int Coins { get; private set; }
+    public int Coins { get; private set; } = 10;
     public int Score { get; private set; }
+
+    public int Damage { get; private set; } = 1;
+    public int Shield { get; private set; } = 1;
+    public int Health { get; private set; } = 50;
 
     private ScoreUIManager ui;
 
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         ui = FindObjectOfType<ScoreUIManager>();
     }
 
+    // SCORE
+    public void AddScore(int amount)
+    {
+        Score += amount;
+        ui?.UpdateScore(Score);
+    }
+
+    public void RemoveScore(int amount)
+    {
+        Score -= amount;
+        if (Score < 0) Score = 0;
+
+        ui?.UpdateScore(Score);
+    }
+
+    public void ResetScore()
+    {
+        Score = 0;
+        ui?.UpdateScore(Score);
+    }
+
+    // COINS
     public void AddCoins(int amount)
     {
         Coins += amount;
@@ -36,28 +61,33 @@ public class ScoreManager : MonoBehaviour
 
         Coins -= amount;
         ui?.UpdateCoins(Coins);
-
         return true;
     }
 
-    public void AddScore(int amount)
+    // STATS
+    public void AddDamage()
     {
-        Score += amount;
-        ui?.UpdateScore(Score);
+        Damage++;
+        ui?.UpdateDamage(Damage);
     }
 
-    public void RemoveScore(int amount)
+    public void AddShield()
     {
-        Score -= amount;
-        if (Score < 0)
-            Score = 0;
-
-        ui?.UpdateScore(Score);
+        Shield++;
+        ui?.UpdateShield(Shield);
     }
 
-    public void ResetScore()
+    public void RestoreHealth()
     {
-        Score = 0;
-        ui?.UpdateScore(Score);
+        Health = 100;
+        ui?.UpdateHealth(Health / 100f);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Health -= amount;
+        if (Health < 0) Health = 0;
+
+        ui?.UpdateHealth(Health / 100f);
     }
 }

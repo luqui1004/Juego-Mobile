@@ -7,77 +7,120 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject down;
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
-    [SerializeField] private GameObject touch;
+    [SerializeField] private GameObject jump;
     [SerializeField] private GameObject shop;
+
+    //buttons area
     [SerializeField] private RectTransform shopButtonArea;
+    [SerializeField] private RectTransform closeShopButtonArea;
+    [SerializeField] private RectTransform purchaseDamageButton;
+    [SerializeField] private RectTransform purchaseShieldButton;
+    [SerializeField] private RectTransform purchaseHealthButton;
+
+    bool isInShop = false;
 
     void Update()
     {
         if (InputManager.Instance == null)
             return;
 
-        if (InputManager.Instance.SwipeUp)
-            Jump();
-
-        if (InputManager.Instance.SwipeDown)
-            Roll();
-
-        if (InputManager.Instance.SwipeLeft)
-            MoveLeft();
-
-        if (InputManager.Instance.SwipeRight)
-            MoveRight();
-
-        if (InputManager.Instance.Touch)
+        if (!isInShop)
         {
-            if (IsTouchOn(shopButtonArea))
+            if (InputManager.Instance.SwipeUp)
+                AttackUp();
+            if (InputManager.Instance.SwipeDown)
+                AttackDown();
+            if (InputManager.Instance.SwipeLeft)
+                AttackLeft();
+            if (InputManager.Instance.SwipeRight)
+                AttackRight();
+
+            if (InputManager.Instance.Touch)
             {
-                OpenShop();
+                if (IsTouchOn(shopButtonArea))
+                    OpenShop();
+                else
+                    Jump();
             }
-            else
+        }
+        else
+        {
+            if (InputManager.Instance.Touch)
             {
-                BasicAttack();
+                if (IsTouchOn(closeShopButtonArea))
+                    CloseShop();
+
+                if (IsTouchOn(purchaseDamageButton))
+                    PurchaseDamage();
+
+                if (IsTouchOn(purchaseShieldButton))
+                    PurchaseShield();
+
+                if (IsTouchOn(purchaseHealthButton))
+                    PurchaseHealth();
             }
         }
     }
 
-    private void Jump()
+    private void AttackUp()
     {
         up.SetActive(true);
         ScoreManager.Instance.AddScore(100);
         StartCoroutine(DisableUp());
     }
 
-    private void Roll()
+    private void AttackDown()
     {
         down.SetActive(true);
         ScoreManager.Instance.RemoveScore(100);
         StartCoroutine(DisableDown());
     }
 
-    private void BasicAttack()
-    {
-        touch.SetActive(true);
-        StartCoroutine(DisableTouch());
-    }
-
-    private void MoveLeft()
+    private void AttackLeft()
     {
         left.SetActive(true);
-        ScoreManager.Instance.AddCoins(100); 
+        ScoreManager.Instance.AddCoins(100);
         StartCoroutine(DisableLeft());
     }
 
-    private void MoveRight()
+    private void AttackRight()
     {
         right.SetActive(true);
         ScoreManager.Instance.RemoveCoins(100);
         StartCoroutine(DisableRight());
     }
 
+    private void Jump()
+    {
+        jump.SetActive(true);
+        StartCoroutine(DisableTouch());
+    }
+
     private void OpenShop()
     {
         shop.SetActive(true);
+        isInShop = true;
+    }
+
+    private void CloseShop()
+    {
+        shop.SetActive(false);
+        isInShop = false;
+    }
+
+    private void PurchaseDamage()
+    {
+        ShopManager.Instance.TryBuyDamage();
+    }
+
+    private void PurchaseShield()
+    {
+        ShopManager.Instance.TryBuyShield();
+    }
+
+    private void PurchaseHealth()
+    {
+        ShopManager.Instance.TryBuyHealth();
     }
 
     private bool IsTouchOn(RectTransform rect)
@@ -91,8 +134,6 @@ public class PlayerController : MonoBehaviour
             null
         );
     }
-
-    //IENUMERATORS
 
     private IEnumerator DisableUp()
     {
@@ -121,6 +162,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DisableTouch()
     {
         yield return new WaitForSeconds(1f);
-        touch.SetActive(false);
+        jump.SetActive(false);
     }
 }
