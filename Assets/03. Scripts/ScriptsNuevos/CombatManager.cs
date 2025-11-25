@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour
+public class CombateManager : MonoBehaviour
 {
-    public static CombatManager Instance;
+    public static CombateManager Instance;
 
     [Header("Combat State")]
     public bool isInCombat = false;

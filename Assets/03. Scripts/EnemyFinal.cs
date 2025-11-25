@@ -94,7 +94,7 @@ public class EnemyFinal : MonoBehaviour
         if (zoom.mainCamera != null)
             StartCoroutine(zoom.CameraZoomIn());
 
-        CombatManager.Instance.StartCombat();
+        CombateManager.Instance.StartCombat();
     }
 
     public void TakeDamage(int amount)
@@ -125,7 +125,7 @@ public class EnemyFinal : MonoBehaviour
         if (arrowSpawner != null)
             arrowSpawner.StopSpawning();
 
-        CombatManager.Instance.EndCombat();
+        CombateManager.Instance.EndCombat();
 
         if (parallaxLooper != null)
         {

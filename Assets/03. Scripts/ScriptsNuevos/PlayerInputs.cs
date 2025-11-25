@@ -55,7 +55,7 @@ public class PlayerInputs : MonoBehaviour
 
     void Update()
     {
-        if (CombatManager.Instance != null && !CombatManager.Instance.isInCombat)
+        if (CombateManager.Instance != null && !CombateManager.Instance.isInCombat)
             return;
 
 #if UNITY_EDITOR

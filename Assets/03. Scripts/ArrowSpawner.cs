@@ -27,7 +27,7 @@ public class ArrowSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (CombatManager.Instance != null && CombatManager.Instance.isInCombat)
+            if (CombateManager.Instance != null && CombateManager.Instance.isInCombat)
                 SpawnArrow();
 
             yield return new WaitForSeconds(spawnInterval);
