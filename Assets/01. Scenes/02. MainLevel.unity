@@ -2044,6 +2044,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1870960650}
   - {fileID: 283877582}
   - {fileID: 596197336}
   - {fileID: 249823514}
@@ -5687,6 +5688,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1543633450}
   - component: {fileID: 1543633451}
+  - component: {fileID: 1543633453}
+  - component: {fileID: 1543633452}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -5761,6 +5764,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1543633452
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543633449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.64, y: 0.64}
+  m_EdgeRadius: 0
+--- !u!114 &1543633453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543633449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f229bbef5233c447b71f0d09f47ce01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
 --- !u!1 &1566214594
 GameObject:
   m_ObjectHideFlags: 0
@@ -6677,6 +6738,109 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852088190}
   m_CullTransparentMesh: 1
+--- !u!1 &1870960649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1870960650}
+  - component: {fileID: 1870960651}
+  m_Layer: 0
+  m_Name: ParallaxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1870960650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870960649}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 444183833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870960651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870960649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7393978c9ebad15489236d16a0e98096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Zone: 0
+  layers:
+  - tiles:
+    - {fileID: 1874188753}
+    - {fileID: 255994209}
+    - {fileID: 287789022}
+    speed: 3.2
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 354242089}
+    - {fileID: 1850735654}
+    - {fileID: 126037780}
+    speed: 4.4
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 1814329226}
+    - {fileID: 796515200}
+    - {fileID: 501349808}
+    speed: 4.5
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 783169352}
+    - {fileID: 513668395}
+    - {fileID: 346359608}
+    speed: 4.5
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 606387181}
+    - {fileID: 1086469249}
+    - {fileID: 370463474}
+    speed: 4.5
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 484156812}
+    - {fileID: 112790799}
+    - {fileID: 1625738453}
+    speed: 4.5
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  - tiles:
+    - {fileID: 1245632974}
+    - {fileID: 1139736837}
+    - {fileID: 622355506}
+    speed: 6
+    sprites: []
+    multiplyer: 1
+    spriteWidth: 0
+  stopParallax: 0
 --- !u!1 &1874188753
 GameObject:
   m_ObjectHideFlags: 0

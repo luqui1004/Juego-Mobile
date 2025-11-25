@@ -87,7 +87,6 @@ public class Enemy : MonoBehaviour
         spawner.OnEnemyKilled(myType);
 
         ScoreManager.Instance.AddScore(100);
-        ScoreManager.Instance.AddCoins(50);
         anim.SetTrigger("Death"); //Anim de muerte.
         Instantiate(Coin, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.5f);
