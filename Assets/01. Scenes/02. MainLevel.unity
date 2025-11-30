@@ -6728,9 +6728,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1874389344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6a260588de9a694794d0ecaf40c31ab, type: 3}
+  m_Script: {fileID: 11500000, guid: b360c4db1f181fe46a6da0eaa4efd451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1753417507}
+  zoomSize: 4.3
+  zoomDuration: 0.8
+  zoomOffset: {x: 0, y: -0.5, z: 0}
 --- !u!1 &1892762278
 GameObject:
   m_ObjectHideFlags: 0

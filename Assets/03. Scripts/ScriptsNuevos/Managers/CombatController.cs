@@ -183,6 +183,7 @@ public class CombatController : MonoBehaviour
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
 
             TextSpawnManager.Instance.SpawnBadText();
+            CameraManager.Instance.DoShake(0.1f, 0.5f);
         }
     }
 
@@ -207,6 +208,7 @@ public class CombatController : MonoBehaviour
         }
 
         TextSpawnManager.Instance.SpawnBadText();
+        CameraManager.Instance.DoShake(0.1f, 0.5f);
 
         if (closest != null)
         {
