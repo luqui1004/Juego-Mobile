@@ -181,6 +181,8 @@ public class CombatController : MonoBehaviour
 
             if (CombatController.Instance.currentEnemy != null)
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+
+            TextSpawnManager.Instance.SpawnBadText();
         }
     }
 
@@ -203,6 +205,8 @@ public class CombatController : MonoBehaviour
                 closest = a;
             }
         }
+
+        TextSpawnManager.Instance.SpawnBadText();
 
         if (closest != null)
         {

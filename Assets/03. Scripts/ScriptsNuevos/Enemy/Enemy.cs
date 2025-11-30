@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         Health -= ScoreManager.Instance.Damage;
+        TextSpawnManager.Instance.SpawnPerfectText();
 
         if (Health <= 0)
         {
