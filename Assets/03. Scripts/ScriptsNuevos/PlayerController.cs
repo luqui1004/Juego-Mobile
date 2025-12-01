@@ -74,31 +74,21 @@ public class PlayerController : MonoBehaviour
 
     private void TryPerfect(ArrowSet.ArrowType swipeType, System.Action attackAction)
     {
-        var current = CombatController.Instance.currentArrowInTarget;
+        var closestCorrect = CombatController.Instance.GetClosestArrowInTarget(swipeType);
 
-        if (!current.HasValue)
+        if (closestCorrect != null)
         {
-            CombatController.Instance.MissByWrongSwipe();
-            ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
-            return;
-        }
-
-        if (current.Value == swipeType)
-        {
-            // PERFECT
+            //perfect
             attackAction.Invoke();
             CombatController.Instance.currentEnemy?.TakeDamage();
 
-            CombatController.Instance.currentArrowUI?.DestroyArrow();
+            closestCorrect.DestroyArrow();
         }
         else
         {
             CombatController.Instance.MissByWrongSwipe();
             ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
         }
-
-        CombatController.Instance.currentArrowInTarget = null;
-        CombatController.Instance.currentArrowUI = null;
     }
 
 

@@ -28,21 +28,13 @@ public class CombatController : MonoBehaviour
 
     private Coroutine spawnRoutine;
 
-    public ArrowSet.ArrowType? currentArrowInTarget = null;
-    public ArrowUI currentArrowUI;
     public Enemy currentEnemy;
 
     public List<ArrowUI> activeArrows = new List<ArrowUI>();
 
-
-
-
     public void StartCombat()
     {
         ClearAllArrows();
-
-        currentArrowUI = null;
-        currentArrowInTarget = null;
 
         combatUI.SetActive(true);
         spawnRoutine = StartCoroutine(SpawnRoutine());
@@ -55,8 +47,6 @@ public class CombatController : MonoBehaviour
 
         ClearAllArrows();
 
-        currentArrowInTarget = null;
-        currentArrowUI = null;
         currentEnemy = null;
 
         combatUI.SetActive(false);
@@ -69,7 +59,6 @@ public class CombatController : MonoBehaviour
 
         activeArrows.Clear();
     }
-
 
     private IEnumerator SpawnRoutine()
     {
@@ -96,8 +85,6 @@ public class CombatController : MonoBehaviour
         arrow.targetZone = targetZone;
 
         activeArrows.Add(arrow);
-
-        currentArrowUI = arrow;
     }
 
     public void SetCombatStats(float newSpeed, float newInterval)
@@ -106,104 +93,72 @@ public class CombatController : MonoBehaviour
         spawnInterval = newInterval;
     }
 
-
-
-
-    public class ArrowUI : MonoBehaviour
+    public ArrowUI GetClosestArrowInTarget(ArrowSet.ArrowType type)
     {
-        public static float arrowSpeed = 2f;
+        ArrowUI best = null;
+        float bestDist = float.MaxValue;
+        float targetX = targetZone.anchoredPosition.x;
 
-        public RectTransform despawnPoint;
-        public RectTransform targetZone;
-
-        private RectTransform rt;
-        private ArrowSet arrowSet;
-        private bool insideTarget = false;
-
-        private void Awake()
+        foreach (var a in activeArrows)
         {
-            rt = GetComponent<RectTransform>();
-            arrowSet = GetComponent<ArrowSet>();
-        }
+            if (a == null) continue;
+            if (!a.IsInsideTarget()) continue;
+            if (a.arrowSet.arrowType != type) continue;
 
-        private void Update()
-        {
-            rt.anchoredPosition += Vector2.right * arrowSpeed * Time.deltaTime;
-
-            if (rt.anchoredPosition.x > despawnPoint.anchoredPosition.x)
+            float dist = Mathf.Abs(a.GetRectTransform().anchoredPosition.x - targetX);
+            if (dist < bestDist)
             {
-                Miss();
-                DestroyArrow();
-                return;
-            }
-
-            if (IsInsideTarget())
-            {
-                if (!insideTarget)
-                {
-                    insideTarget = true;
-                    CombatController.Instance.currentArrowInTarget = arrowSet.arrowType;
-                    CombatController.Instance.currentArrowUI = this;
-                }
-            }
-            else
-            {
-                if (insideTarget)
-                {
-                    insideTarget = false;
-                }
+                bestDist = dist;
+                best = a;
             }
         }
 
-        private bool IsInsideTarget()
-        {
-            float halfWidth = targetZone.rect.width / 2f;
-            return Mathf.Abs(rt.anchoredPosition.x - targetZone.anchoredPosition.x) < halfWidth;
-        }
+        return best;
+    }
 
-        public void DestroyArrow()
-        {
-            CombatController.Instance.activeArrows.Remove(this);
+    // Variante que devuelve la flecha dentro del target (de cualquier tipo) más cercana al centro.
+    public ArrowUI GetClosestArrowInTargetAny()
+    {
+        ArrowUI best = null;
+        float bestDist = float.MaxValue;
+        float targetX = targetZone.anchoredPosition.x;
 
-            if (CombatController.Instance.currentArrowUI == this)
+        foreach (var a in activeArrows)
+        {
+            if (a == null) continue;
+            if (!a.IsInsideTarget()) continue;
+
+            float dist = Mathf.Abs(a.GetRectTransform().anchoredPosition.x - targetX);
+            if (dist < bestDist)
             {
-                CombatController.Instance.currentArrowInTarget = null;
-                CombatController.Instance.currentArrowUI = null;
+                bestDist = dist;
+                best = a;
             }
-
-            Destroy(gameObject);
         }
 
-        public void Miss()
-        {
-            CombatController.Instance.currentArrowInTarget = null;
-            CombatController.Instance.currentArrowUI = null;
-
-            if (CombatController.Instance.currentEnemy != null)
-                ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
-
-            TextSpawnManager.Instance.SpawnBadText();
-            CameraManager.Instance.DoShake(0.1f, 0.5f);
-        }
+        return best;
     }
 
     public void MissByWrongSwipe()
     {
         if (activeArrows.Count == 0) return;
 
-        ArrowUI closest = null;
-        float closestDistance = float.MaxValue;
+        ArrowUI closest = GetClosestArrowInTargetAny();
 
-        foreach (var a in activeArrows)
+        if (closest == null)
         {
-            if (a == null) continue;
-
-            float distance = Mathf.Abs(a.GetComponent<RectTransform>().anchoredPosition.x - targetZone.anchoredPosition.x);
-
-            if (distance < closestDistance)
+            float closestDistance = float.MaxValue;
+            foreach (var a in activeArrows)
             {
-                closestDistance = distance;
-                closest = a;
+                if (a == null) continue;
+
+                float distance = Mathf.Abs(a.GetRectTransform().anchoredPosition.x - targetZone.anchoredPosition.x);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closest = a;
+                }
             }
         }
 
@@ -214,6 +169,99 @@ public class CombatController : MonoBehaviour
         {
             closest.Miss();
             closest.DestroyArrow();
+        }
+    }
+
+    public class ArrowUI : MonoBehaviour
+    {
+        public static float arrowSpeed = 2f;
+
+        public RectTransform despawnPoint;
+        public RectTransform targetZone;
+
+        private RectTransform rt;
+        public ArrowSet arrowSet;
+        private bool insideTarget = false;
+
+        private float prevX;
+
+        private void Awake()
+        {
+            rt = GetComponent<RectTransform>();
+            arrowSet = GetComponent<ArrowSet>();
+            prevX = rt.anchoredPosition.x;
+        }
+
+        private void Update()
+        {
+            float delta = arrowSpeed * Time.deltaTime;
+            float newX = rt.anchoredPosition.x + delta;
+
+            rt.anchoredPosition = new Vector2(newX, rt.anchoredPosition.y);
+
+            if (rt.anchoredPosition.x > despawnPoint.anchoredPosition.x)
+            {
+                Miss();
+                DestroyArrow();
+                return;
+            }
+
+            if (CrossedTarget(prevX, newX))
+            {
+                if (!insideTarget)
+                {
+                    insideTarget = true;
+                }
+            }
+            else
+            {
+                if (insideTarget)
+                {
+                    insideTarget = false;
+                }
+            }
+
+            prevX = rt.anchoredPosition.x;
+        }
+
+        private bool CrossedTarget(float previousX, float currentX)
+        {
+            float targetCenter = targetZone.anchoredPosition.x;
+            float halfWidth = targetZone.rect.width / 2f;
+            float left = targetCenter - halfWidth;
+            float right = targetCenter + halfWidth;
+
+            if ((previousX >= left && previousX <= right) || (currentX >= left && currentX <= right))
+                return true;
+
+            if ((previousX < left && currentX > right) || (previousX < left && currentX >= left) || (previousX <= right && currentX > right))
+                return true;
+
+            return false;
+        }
+
+        public bool IsInsideTarget()
+        {
+            return insideTarget;
+        }
+
+        public RectTransform GetRectTransform() => rt;
+
+        public void DestroyArrow()
+        {
+            if (CombatController.Instance != null)
+                CombatController.Instance.activeArrows.Remove(this);
+
+            Destroy(gameObject);
+        }
+
+        public void Miss()
+        {
+            if (CombatController.Instance != null && CombatController.Instance.currentEnemy != null)
+                ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
+
+            TextSpawnManager.Instance.SpawnBadText();
+            CameraManager.Instance.DoShake(0.1f, 0.5f);
         }
     }
 }
