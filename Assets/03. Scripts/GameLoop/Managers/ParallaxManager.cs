@@ -13,6 +13,7 @@ public class ParallaxManager : MonoBehaviour
     public List<ParallaxLayer> layers = new List<ParallaxLayer>();
 
     private bool stopping = false;
+    private bool resuming = false;
     private float currentSpeedMultiplier = 1f;
 
     [Header("Zonas")]
@@ -28,13 +29,14 @@ public class ParallaxManager : MonoBehaviour
     private void Start()
     {
         InitializeLayers();
-        ApplyZone(zone1); // zona por defecto
+        ApplyZone(zone1);
     }
 
     private void Update()
     {
         UpdateParallax();
         SmoothStop();
+        SmoothResume();
     }
 
     private void InitializeLayers()
@@ -43,7 +45,6 @@ public class ParallaxManager : MonoBehaviour
         {
             float speedFactor = 1f - (i * 0.15f);
             speedFactor = Mathf.Clamp(speedFactor, 0.1f, 1f);
-
             layers[i].Initialize(speedFactor, baseSpeed);
         }
     }
@@ -67,13 +68,28 @@ public class ParallaxManager : MonoBehaviour
         }
     }
 
+    private void SmoothResume()
+    {
+        if (!resuming) return;
+
+        currentSpeedMultiplier = Mathf.Lerp(currentSpeedMultiplier, 1f, Time.deltaTime * stopSmoothness);
+
+        if (currentSpeedMultiplier > 0.99f)
+        {
+            currentSpeedMultiplier = 1f;
+            resuming = false;
+        }
+    }
+
     public void StopParallax()
     {
         stopping = true;
+        resuming = false;
     }
 
     public void RenaudeParallax()
     {
+        resuming = true;
         stopping = false;
     }
 
@@ -103,14 +119,12 @@ public class ParallaxManager : MonoBehaviour
 [System.Serializable]
 public class ParallaxZone
 {
-    [Tooltip("Un sprite por capa. Layer 0 usa sprite[0], Layer 1 usa sprite[1], etc")]
     public Sprite[] layerSprites;
 }
 
 [System.Serializable]
 public class ParallaxLayer
 {
-    [Tooltip("Sprites repetidos (mínimo 2) que forman el loop del layer")]
     public Transform[] tileSprites;
 
     private float finalSpeed;
