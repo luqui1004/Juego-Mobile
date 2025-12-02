@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject right;
     [SerializeField] private GameObject jump;
     [SerializeField] private GameObject shop;
+    [SerializeField] private GameObject settings;
 
     [SerializeField] private RectTransform shopButtonArea;
     [SerializeField] private RectTransform closeShopButtonArea;
@@ -16,15 +17,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RectTransform purchaseShieldButton;
     [SerializeField] private RectTransform purchaseHealthButton;
 
+    [SerializeField] private RectTransform settingsButtonArea;
+    [SerializeField] private RectTransform closeSettingsButtonArea;
+
     public bool isInCombat = false;
     bool isInShop = false;
+    bool isInSettings = false;
+
+    private void Start()
+    {
+        //PauseManager.Instance.ResumeGame();
+    }
 
     void Update()
     {
         if (InputManager.Instance == null)
             return;
 
-        if (!isInShop)
+        if (!isInShop && !isInSettings)
         {
             if (!isInCombat)
             {
@@ -32,6 +42,8 @@ public class PlayerController : MonoBehaviour
                 {
                     if (IsTouchOn(shopButtonArea))
                         OpenShop();
+                    if (IsTouchOn(settingsButtonArea))
+                        OpenSettings();
                     else
                         Jump();
                 }
@@ -68,6 +80,15 @@ public class PlayerController : MonoBehaviour
 
                 if (IsTouchOn(purchaseHealthButton))
                     PurchaseHealth();
+            }
+        }
+
+        if (isInSettings)
+        {
+            if (InputManager.Instance.Touch)
+            {
+                if (IsTouchOn(closeSettingsButtonArea))
+                    CloseSettings();
             }
         }
     }
@@ -135,6 +156,20 @@ public class PlayerController : MonoBehaviour
         PauseManager.Instance.ResumeGame();
         shop.SetActive(false);
         isInShop = false;
+    }
+
+    private void OpenSettings()
+    {
+        PauseManager.Instance.PauseGame();
+        settings.SetActive(true);
+        isInSettings = true;
+    }
+
+    private void CloseSettings()
+    {
+        PauseManager.Instance.ResumeGame();
+        settings.SetActive(false);
+        isInSettings = false;
     }
 
     private void PurchaseDamage() => ShopManager.Instance.TryBuyDamage();

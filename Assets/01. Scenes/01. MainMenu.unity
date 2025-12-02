@@ -365,8 +365,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2111732825}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_TargetAssemblyTypeName: ButtonAdministration, Assembly-CSharp
+        m_MethodName: GoToPlayLoop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -497,8 +497,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2111732825}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_TargetAssemblyTypeName: ButtonAdministration, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -811,7 +811,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2111732820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0372d13e7546adc4b9652bcc56ddb0a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 01f5cfb8fef14de469102502a5349779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
