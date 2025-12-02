@@ -34,6 +34,7 @@ public class CombatController : MonoBehaviour
 
     public void StartCombat()
     {
+        CameraManager.Instance.DoZoomIn();
         ClearAllArrows();
 
         combatUI.SetActive(true);
@@ -42,6 +43,7 @@ public class CombatController : MonoBehaviour
 
     public void EndCombat()
     {
+        CameraManager.Instance.DoZoomOut();
         if (spawnRoutine != null)
             StopCoroutine(spawnRoutine);
 
