@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour, IPausable
     [SerializeField] private float runnerExtraInterval;
 
     private bool isPaused = false;
+    private int killCounter;
 
     void Start()
     {
@@ -65,9 +66,24 @@ public class EnemySpawner : MonoBehaviour, IPausable
                 break;
         }
 
+        killCounter++;
+
+        if (killCounter == 5)
+        {
+            PanelZoneManager.Instance.ShowDesertZone();
+            ParallaxManager.Instance.SwitchParallaxZone2();
+        }
+
+        if (killCounter == 10)
+        {
+            PanelZoneManager.Instance.ShowGraveyardZone();
+            ParallaxManager.Instance.SwitchParallaxZone3();
+        }
+
         EnemyType next = (EnemyType)Random.Range(0, 3);
         SpawnNextEnemy(next);
     }
+
 
     public void SpawnNextEnemy(EnemyType type)
     {

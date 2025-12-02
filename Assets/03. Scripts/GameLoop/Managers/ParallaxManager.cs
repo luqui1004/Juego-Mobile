@@ -28,6 +28,7 @@ public class ParallaxManager : MonoBehaviour
 
     private void Start()
     {
+        PanelZoneManager.Instance.ShowVillageZone();
         InitializeLayers();
         ApplyZone(zone1);
     }
