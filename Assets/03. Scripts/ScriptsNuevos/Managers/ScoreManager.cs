@@ -85,8 +85,15 @@ public class ScoreManager : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Health -= amount;
-        if (Health < 0) Health = 0;
+        int finalDamage = amount - Shield;
+
+        if (finalDamage < 1)
+            finalDamage = 1;
+
+        Health -= finalDamage;
+
+        if (Health < 0)
+            Health = 0;
 
         ui?.UpdateHealth(Health / 100f);
     }
