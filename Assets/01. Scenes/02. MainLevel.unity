@@ -2180,16 +2180,19 @@ MonoBehaviour:
     damage: 5
     baseSpeedArrow: 250
     baseIntervalArrow: 1
+    animatorEnemy: {fileID: 9100000, guid: f4a2991c6eeb207429193b0a72e5bdbd, type: 2}
   tankStats:
     baseHealth: 20
     damage: 7
-    baseSpeedArrow: 250
+    baseSpeedArrow: 200
     baseIntervalArrow: 1
+    animatorEnemy: {fileID: 9100000, guid: 58e540e68e5d6a048b231c06ea973afc, type: 2}
   runnerStats:
-    baseHealth: 10
+    baseHealth: 7
     damage: 5
     baseSpeedArrow: 300
     baseIntervalArrow: 1
+    animatorEnemy: {fileID: 9100000, guid: d76a947f92c7f7d46a9d1b87db7fa1f4, type: 2}
   normalExtraHealth: 0
   normalExtraDamage: 0
   normalExtraSpeed: 0
@@ -2202,6 +2205,16 @@ MonoBehaviour:
   runnerExtraDamage: 0
   runnerExtraSpeed: 0
   runnerExtraInterval: 0
+  animatorsControllers:
+  - {fileID: 9100000, guid: f4a2991c6eeb207429193b0a72e5bdbd, type: 2}
+  - {fileID: 9100000, guid: e3912728bb90fb34f91e2a7292c069dd, type: 2}
+  - {fileID: 9100000, guid: 06d06efe50ff04546b104551839ec86a, type: 2}
+  - {fileID: 9100000, guid: d76a947f92c7f7d46a9d1b87db7fa1f4, type: 2}
+  - {fileID: 9100000, guid: bada5e4547225084b9d3d1cfcbb01462, type: 2}
+  - {fileID: 9100000, guid: cf9606e6b8f7b4748a489d8dd9d8ea93, type: 2}
+  - {fileID: 9100000, guid: 58e540e68e5d6a048b231c06ea973afc, type: 2}
+  - {fileID: 9100000, guid: 0e5ee027e3d3fa4428305261e2c90817, type: 2}
+  - {fileID: 9100000, guid: 402ae4feacf460d4ab622fc532df44fa, type: 2}
 --- !u!1 &595023052
 GameObject:
   m_ObjectHideFlags: 0

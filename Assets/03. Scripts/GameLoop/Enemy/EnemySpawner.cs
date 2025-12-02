@@ -47,22 +47,22 @@ public class EnemySpawner : MonoBehaviour, IPausable
             case EnemyType.Normal:
                 normalExtraHealth += 5;
                 normalExtraDamage += 2;
-                normalExtraSpeed += 200f;
-                normalExtraInterval += 0.2f;
+                normalExtraSpeed += 50f;
+                normalExtraInterval += 0.05f;
                 break;
 
             case EnemyType.Tank:
                 tankExtraHealth += 5;
                 tankExtraDamage += 2;
-                tankExtraSpeed += 200f;
-                tankExtraInterval += 0.2f;
+                tankExtraSpeed += 50f;
+                tankExtraInterval += 0.05f;
                 break;
 
             case EnemyType.Runner:
                 runnerExtraHealth += 5;
                 runnerExtraDamage += 2;
-                runnerExtraSpeed += 200f;
-                runnerExtraInterval += 0.2f;
+                runnerExtraSpeed += 50f;
+                runnerExtraInterval += 0.05f;
                 break;
         }
 
@@ -124,6 +124,7 @@ public class EnemySpawner : MonoBehaviour, IPausable
                 extraDamage = normalExtraDamage;
                 extraSpeed = normalExtraSpeed;
                 extraInterval = normalExtraInterval;
+ 
                 break;
         }
 

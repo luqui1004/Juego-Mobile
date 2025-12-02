@@ -32,6 +32,8 @@ public class CombatController : MonoBehaviour
 
     public List<ArrowUI> activeArrows = new List<ArrowUI>();
 
+    private Animator anim;
+
     public void StartCombat()
     {
         CameraManager.Instance.DoZoomIn();
@@ -264,6 +266,7 @@ public class CombatController : MonoBehaviour
             if (CombatController.Instance != null && CombatController.Instance.currentEnemy != null)
                 ScoreManager.Instance.TakeDamage(CombatController.Instance.currentEnemy.Damage);
 
+            CombatController.Instance.currentEnemy.anim.SetTrigger("Attack");
             TextSpawnManager.Instance.SpawnBadText();
             CameraManager.Instance.DoShake(0.1f, 0.5f);
         }

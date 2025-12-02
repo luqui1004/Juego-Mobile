@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IPausable
     private PlayerController playerController;
 
     private bool isPaused = false;
+    public Animator anim; //Sirve para que muera el enemigo
 
     public void Init(
         EnemyStatsBase stats,
@@ -86,7 +87,7 @@ public class Enemy : MonoBehaviour, IPausable
             GameObject p = Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(p, 0.5f);
         }
-
+        anim.SetTrigger("Dead");
         Destroy(gameObject);
     }
 
