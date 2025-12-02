@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPausable
 {
     public int Health { get; private set; }
     public int Damage { get; private set; }
@@ -8,10 +8,13 @@ public class Enemy : MonoBehaviour
     public float IntervalArrow { get; private set; }
 
     [SerializeField] private float moveSpeed = 3f;
+    private float savedMoveSpeed;
 
     private EnemySpawner spawner;
     private EnemySpawner.EnemyType myType;
     private PlayerController playerController;
+
+    private bool isPaused = false;
 
     public void Init(
         EnemyStatsBase stats,
@@ -33,6 +36,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (isPaused) return;
+
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
     }
 
@@ -76,5 +81,18 @@ public class Enemy : MonoBehaviour
         ScoreManager.Instance.AddCoins(50);
 
         Destroy(gameObject);
+    }
+
+    public void OnPause()
+    {
+        isPaused = true;
+        savedMoveSpeed = moveSpeed;
+        moveSpeed = 0f;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+        moveSpeed = savedMoveSpeed;
     }
 }

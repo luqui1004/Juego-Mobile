@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IPausable
 {
     public Enemy normalPrefab;
     public Enemy tankPrefab;
@@ -28,6 +28,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float runnerExtraSpeed;
     [SerializeField] private float runnerExtraInterval;
 
+    private bool isPaused = false;
+
     void Start()
     {
         SpawnNextEnemy(EnemyType.Normal);
@@ -37,6 +39,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void OnEnemyKilled(EnemyType type)
     {
+        if (isPaused) return;
+
         switch (type)
         {
             case EnemyType.Normal:
@@ -67,6 +71,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnNextEnemy(EnemyType type)
     {
+        if (isPaused) return;
+
         Enemy prefab = normalPrefab;
         EnemyStatsBase stats = normalStats;
 
@@ -80,7 +86,6 @@ public class EnemySpawner : MonoBehaviour
             case EnemyType.Tank:
                 prefab = tankPrefab;
                 stats = tankStats;
-
                 extraHealth = tankExtraHealth;
                 extraDamage = tankExtraDamage;
                 extraSpeed = tankExtraSpeed;
@@ -90,7 +95,6 @@ public class EnemySpawner : MonoBehaviour
             case EnemyType.Runner:
                 prefab = runnerPrefab;
                 stats = runnerStats;
-
                 extraHealth = runnerExtraHealth;
                 extraDamage = runnerExtraDamage;
                 extraSpeed = runnerExtraSpeed;
@@ -100,7 +104,6 @@ public class EnemySpawner : MonoBehaviour
             case EnemyType.Normal:
                 prefab = normalPrefab;
                 stats = normalStats;
-
                 extraHealth = normalExtraHealth;
                 extraDamage = normalExtraDamage;
                 extraSpeed = normalExtraSpeed;
@@ -110,5 +113,15 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy newEnemy = Instantiate(prefab, transform.position, Quaternion.identity);
         newEnemy.Init(stats, extraHealth, extraDamage, extraSpeed, extraInterval, this, type);
+    }
+
+    public void OnPause()
+    {
+        isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
     }
 }

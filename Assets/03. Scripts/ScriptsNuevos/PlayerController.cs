@@ -125,12 +125,14 @@ public class PlayerController : MonoBehaviour
 
     private void OpenShop()
     {
+        PauseManager.Instance.PauseGame();
         shop.SetActive(true);
         isInShop = true;
     }
 
     private void CloseShop()
     {
+        PauseManager.Instance.ResumeGame();
         shop.SetActive(false);
         isInShop = false;
     }
