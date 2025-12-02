@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public int Health { get; private set; } = 100;
 
     private ScoreUIManager ui;
+    public static int LastRunScore = 0;
 
     private void Awake()
     {
@@ -96,5 +98,11 @@ public class ScoreManager : MonoBehaviour
             Health = 0;
 
         ui?.UpdateHealth(Health / 100f);
+
+        if (Health <= 0)
+        {
+            ScoreManager.LastRunScore = Score;
+            SceneManager.LoadScene(2);
+        }
     }
 }

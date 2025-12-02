@@ -24,6 +24,12 @@ public class PlayerController : MonoBehaviour
     bool isInShop = false;
     bool isInSettings = false;
 
+    private void Start()
+    {
+        ScoreManager.Instance.ResetScore();
+        ScoreManager.LastRunScore = 0;
+    }
+
     void Update()
     {
         if (InputManager.Instance == null)
