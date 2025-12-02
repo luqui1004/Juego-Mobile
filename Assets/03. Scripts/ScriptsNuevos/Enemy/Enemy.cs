@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IPausable
     public float IntervalArrow { get; private set; }
 
     [SerializeField] private float moveSpeed = 3f;
+    public GameObject deathParticles;
     private float savedMoveSpeed;
 
     private EnemySpawner spawner;
@@ -79,6 +80,12 @@ public class Enemy : MonoBehaviour, IPausable
 
         ScoreManager.Instance.AddScore(100);
         ScoreManager.Instance.AddCoins(50);
+
+        if (deathParticles != null)
+        {
+            GameObject p = Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(p, 0.5f);
+        }
 
         Destroy(gameObject);
     }

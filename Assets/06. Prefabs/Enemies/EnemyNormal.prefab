@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  deathParticles: {fileID: 6409870278005964074, guid: 3915928e68a9abc4aaf7fe7f512af726, type: 3}
 --- !u!50 &3172098040745413865
 Rigidbody2D:
   serializedVersion: 4
