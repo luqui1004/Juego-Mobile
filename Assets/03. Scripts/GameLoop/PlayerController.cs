@@ -3,11 +3,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject up;
-    [SerializeField] private GameObject down;
-    [SerializeField] private GameObject left;
-    [SerializeField] private GameObject right;
-    [SerializeField] private GameObject jump;
     [SerializeField] private GameObject shop;
     [SerializeField] private GameObject settings;
 
@@ -116,32 +111,27 @@ public class PlayerController : MonoBehaviour
 
     private void AttackUp()
     {
-        up.SetActive(true);
-        StartCoroutine(DisableUp());
+        Debug.Log("Attack");
     }
 
     private void AttackDown()
     {
-        down.SetActive(true);
-        StartCoroutine(DisableDown());
+        Debug.Log("Attack");
     }
 
     private void AttackLeft()
     {
-        left.SetActive(true);
-        StartCoroutine(DisableLeft());
+        Debug.Log("Attack");
     }
 
     private void AttackRight()
     {
-        right.SetActive(true);
-        StartCoroutine(DisableRight());
+        Debug.Log("Attack");
     }
 
     private void Jump()
     {
-        jump.SetActive(true);
-        StartCoroutine(DisableTouch());
+        Debug.Log("Jump");
     }
 
 
@@ -188,36 +178,5 @@ public class PlayerController : MonoBehaviour
             Input.GetTouch(0).position,
             null
         );
-    }
-
-
-    private IEnumerator DisableUp()
-    {
-        yield return new WaitForSeconds(1f);
-        up.SetActive(false);
-    }
-
-    private IEnumerator DisableDown()
-    {
-        yield return new WaitForSeconds(1f);
-        down.SetActive(false);
-    }
-
-    private IEnumerator DisableLeft()
-    {
-        yield return new WaitForSeconds(1f);
-        left.SetActive(false);
-    }
-
-    private IEnumerator DisableRight()
-    {
-        yield return new WaitForSeconds(1f);
-        right.SetActive(false);
-    }
-
-    private IEnumerator DisableTouch()
-    {
-        yield return new WaitForSeconds(1f);
-        jump.SetActive(false);
     }
 }
