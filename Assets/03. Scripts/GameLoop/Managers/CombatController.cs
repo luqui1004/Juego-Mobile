@@ -35,6 +35,7 @@ public class CombatController : MonoBehaviour
     public void StartCombat()
     {
         CameraManager.Instance.DoZoomIn();
+        ParallaxManager.Instance.StopParallax();
         ClearAllArrows();
 
         combatUI.SetActive(true);
@@ -44,6 +45,7 @@ public class CombatController : MonoBehaviour
     public void EndCombat()
     {
         CameraManager.Instance.DoZoomOut();
+        ParallaxManager.Instance.RenaudeParallax();
         if (spawnRoutine != null)
             StopCoroutine(spawnRoutine);
 
