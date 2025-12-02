@@ -198,7 +198,7 @@ RectTransform:
   m_GameObject: {fileID: 67407676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9014081, y: 1, z: 0.9014081}
+  m_LocalScale: {x: 2.0649457, y: 2.2908, z: 2.0649457}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1156335185}
@@ -3183,7 +3183,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723324642}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3840,7 +3840,7 @@ RectTransform:
   m_GameObject: {fileID: 1014434094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.121915, y: 7.0729494, z: 1.0926646}
+  m_LocalScale: {x: 7.121915, y: 7.072949, z: 1.0926646}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 438852955}
@@ -4480,6 +4480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1156335185}
+  - component: {fileID: 1156335186}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -4511,6 +4512,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1156335186
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156335184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcf0ca6a49bbd7840bc691270ff80b6b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1158826951
 GameObject:
   m_ObjectHideFlags: 0
@@ -5456,7 +5478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1373942305
 RectTransform:
   m_ObjectHideFlags: 0
